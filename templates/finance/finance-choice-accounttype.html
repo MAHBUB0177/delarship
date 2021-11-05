@@ -1,0 +1,4 @@
+<option value="">----------</option>
+{% for data in list_data %}
+<option value="{{ data.account_type_code }}">{{ data.account_type_code }} - {{ data.account_type_name }}</option>
+{% endfor %}

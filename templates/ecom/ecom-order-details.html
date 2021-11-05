@@ -1,0 +1,88 @@
+<div class="card">
+
+	<div class="card-body">
+		<div class="mt-1 mb-1">
+			<label>Dalivery Man</label>
+			<select id="delivery_man_id" class="form-control">
+				<option value="">------------</option>
+				{% for man in delivery_man %}
+					<option value="{{man.employee_id}}">{{man.employee_name}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<table id="data_table_sheet" class="table table-hover table-bordered table-sm">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Product Name</th>
+					<th>Quantity</th>
+					<th>Unit Price</th>
+					<th>Total Price</th>
+					<th>Discount Rate</th>
+					<th>Total Discount</th>
+					<th>Price After Discount</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for rows in data %}
+				<tr>
+					<td class="product_id" data-type="name">{{ rows.product_id }}</td>
+					<td class="product_name" data-type="name">{{ rows.product_name }}</td>
+					<td><input type='number' class='quantity' value={{ rows.order_quantity }} onchange='calculfac()'></td>
+					<td><input type='number' class='product_price' value={{ rows.product_price }} onchange='calculfac()'></td>
+					<td class="total_price" data-type="inst">{{ rows.total_price }}</td>
+					<td><input type='number' class='discount_rate' value={{ rows.discount_rate }} onchange='calculfac()'></td>
+					<td><input type='number' class='discount_amount' value={{ rows.discount_amount }} onchange='calculfac()'></td>
+					<td class="sales_amount" data-type="inst">{{ rows.sales_amount }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th></th>
+					<th>Total: </th>
+					<th id="total_quantity" class="total_quantity"></th>
+					<th></th>
+					<th id="total_total_price" class="total_total_price"></th>
+					<th></th>
+					<th id="total_discount_amount" class="total_discount_amount"></th>
+					<th id="total_price_after_discount" class="total_price_after_discount"></th>
+				</tr>
+				<tr>
+					<th></th>
+					<th colspan="5">Coupon Discount </th>
+					<th>:</th>
+					<th>
+						<input type="hidden" value="{{order.discount_amount}}" id="totalDis">
+						- <strong id="coupan-dis"></strong>
+					</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th colspan="5">Dalivery Charge </th>
+					<th>:</th>
+					<th>
+						+ <strong id="Dalivery-charge">{{order.delivery_charge}}</strong>
+					</th>
+				</tr>
+				<tr>
+					<th></th>
+					<th colspan="5">Payable Price </th>
+					<th>:</th>
+					<th>
+						<strong id="payable-price"></strong>
+					</th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button onclick='order_accept("{{order.order_number}}");' type="button" class="btn btn-primary">Accept</button>
+  </div>
+<script>
+	$(document).ready(function () {
+    $('#delivery_man_id').select2();
+});
+</script>

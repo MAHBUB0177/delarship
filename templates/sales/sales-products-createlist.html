@@ -1,0 +1,165 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Manage Products | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-fluid">
+			<div class="card-body">
+				<div>
+					<form method="post" id="tran_table_data" data-url="{% url 'sales-products-insert' %}"
+						class="update-form">
+						<div class="form-group">
+							<div class="card">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-10 mb-0">
+											<h3 class="card-title"> Create New Product </h3>
+										</div>
+									</div>
+									<div>
+										{% csrf_token %}
+										<div class="form-row">
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_name|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_model|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_group|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.brand_id|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_bar_code|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_purces_price|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_sales_price|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.emi_sales_price|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.whole_sales_price|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_tax_rate|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_life_time|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_status|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.sales_discount_type|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.sales_discount_percent|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.sales_discount_maxamt|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.sales_discount_fromdt|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.sales_discount_uptodt|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-3 mb-0">
+												{{ form.product_narration|as_crispy_field }}
+											</div>
+										</div>
+										<button type="button" id="btnAddItem" class="btn btn-primary">Create New
+											Product</button>
+										<button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+											Product</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="app">
+
+		<div class="card card-fluid">
+			<div class="card-body">
+				<table id="dt-product-list" class="table dt-responsive nowrap w-100">
+					<thead>
+						<tr>
+							<th> Product Model </th>
+							<th> Product Name </th>
+							<th> Barcode</th>
+							<th> Purchase Price </th>
+							<th> Sales Price </th>
+							<th> Tax Rate </th>
+							<th> Product Life </th>
+							<th> Status </th>
+							<th> Comments</th>
+							<th> Discount Type </th>
+							<th> Percent </th>
+							<th> Maximum Amount </th>
+							<th> Minimum Amount</th>
+							<th> From Date </th>
+							<th> Upto Date </th>
+							<th> Action</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th> Product Model </th>
+							<th> Product Name </th>
+							<th> Barcode</th>
+							<th> Purchase Price </th>
+							<th> Sales Price </th>
+							<th> Tax Rate </th>
+							<th> Product Life </th>
+							<th> Status </th>
+							<th> Comments</th>
+							<th> Discount Type </th>
+							<th> Percent </th>
+							<th> Maximum Amount </th>
+							<th> Minimum Amount</th>
+							<th> From Date </th>
+							<th> Upto Date </th>
+							<th> Action</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="edit_model" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+	{% endblock body %}
+
+
+	{% block js %}
+	<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+	
+	<script src="{% static 'assets/javascript/pages/sales/sales-products-createlist.js' %}"></script>
+	{% endblock %}
+	</body>

@@ -1,0 +1,21 @@
+{% load humanize %}
+<table id="data_table_sheet" class="table table-hover table-bordered table-sm">
+    <thead>
+        <tr>
+            <th class="text-center">Product Name</th>
+            <th class="text-center"> Receive Quantity</th>
+            <th class="text-center">Receive Value</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for rows in data %}
+        <tr>
+            <td class="text-left" data-type="name">{{ rows.product_name|default_if_none:"" }}</td>
+            <td class="text-center" data-type="inst">{{ rows.receive_quantity|default_if_none:"" }}</td>
+            <td class="text-center" data-type="inst">{{ rows.receive_value|default_if_none:"" }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

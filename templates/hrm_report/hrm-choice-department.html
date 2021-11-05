@@ -1,0 +1,4 @@
+<option value="">-- Select Department --</option>
+{% for data in list_data %}
+<option value="{{ data.department_id }}">{{ data.department_name }}</option>
+{% endfor %}

@@ -1,0 +1,73 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal-header"> </div>
+{% csrf_token %}
+<div class="container">
+	<h4 align="center">Update return packet</h4>
+	<div class="card">
+		<div class="card-body">
+			<div>
+				<form method="post" id="edit_form" data-url="{% url 'delar_sales_packet_return_edit' id %}"
+					class="update-form">
+					{% csrf_token %}
+					<div class="form-row">
+            <div class="form-item col-md-3 mb-0">
+              <label>Client</label>
+              <select name="client_id" class="form-control">
+                  <option value="">----------</option>
+                  {% for c in clients %}
+                  <option value="{{c.client_id}}" {% if c.client_id == data.client_id %} selected {% endif %}>{{c.client_name}}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          <div class="form-item col-md-3 mb-0">
+            <label>Product</label>
+            <select name="product_id" class="form-control">
+                <option value="">----------</option>
+                {% for p in product %}
+                <option value="{{p.product_id}}" {% if p.product_id == data.product_id %} selected {% endif %}>{{p.product_name}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-item col-md-3 mb-0">
+            <label>Executive</label>
+            <select name="employee_id" class="form-control">
+                <option value="">----------------</option>
+                {% for e in employee %}
+                <option value="{{e.employee_id}}" {% if e.employee_id == data.employee_id %}  selected {% endif %}>{{e.employee_name}}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+          <div class="form-item col-md-3 mb-0">
+              {{ form.return_date|as_crispy_field }}
+          </div>
+          <!-- <div class="form-item col-md-3 mb-0">
+              {{ form.tran_type_code|as_crispy_field }}
+          </div>
+          <div class="form-item col-md-3 mb-0">
+              {{ form.tran_batch_number|as_crispy_field }}
+          </div> -->
+          <div class="form-item col-md-3 mb-0">
+              {{ form.receive_quantity|as_crispy_field }}
+          </div>
+          <div class="form-item col-md-3 mb-0">
+              {{ form.receive_value|as_crispy_field }}
+          </div>
+          <div class="form-item col-md-3 mb-0">
+              {{ form.status|as_crispy_field }}
+          </div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Close</button>
+				<button type="submit" id="btnSubmit" class="btn btn-primary">Update</button>
+			</div>
+			</form>
+			<div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'assets/javascript/pages/common-submit-editdata.js' %}"></script>

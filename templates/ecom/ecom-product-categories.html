@@ -1,0 +1,95 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Product categories | {{ application_title }}
+{% endblock %}
+
+{% block upperjs %}
+
+{% endblock %}
+
+{% block body %}
+
+<body>
+  <div class="app">
+    <div class="page">
+
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h4 class="card-title"> Product Categories </h4>
+                <form id="New-create-data" data-url="ecom-product-categories-insert">
+                  {% csrf_token %}
+                  <div class="form-row">
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.categories_name | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.image_class_name | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.status | as_crispy_field }}
+                    </div>
+                  </div>
+                  <button type="button" id="btnInsert" class="btn btn-primary pull-right">Create Category</button>
+                  <button type="button" id="btnSearch" class="btn btn-info pull-right"> Search Category</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <header class="card-title-bar">
+            <h3 class="card-title text-center"> Categories</h3>
+          </header>
+          <div class="card card-fluid">
+            <div class="card-body">
+              <table id="dt-invoice-list" class="table dt-responsive nowrap w-100">
+                <thead>
+                  <tr>
+                    <th> Category ID </th>
+                    <th> Category Name </th>
+                    <th> Image Class Name </th>
+                    <th> Status </th>
+                    <th> Action</th>
+                  </tr>
+                </thead>
+
+                <tfoot>
+                  <tr>
+                    <th> Category ID </th>
+                    <th> Category Name </th>
+                    <th> Image Class Name </th>
+                    <th> Status </th>
+                    <th> Action</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="edit_model" role="dialog">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}
+
+  {% block js %}
+
+  <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/ecom/ecom-product-category.js' %}"></script>
+
+  {% endblock %}
+</body>

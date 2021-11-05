@@ -1,0 +1,63 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal-header"> </div>
+{% csrf_token %}
+<div class="container">
+	<h4 align="center">Update Sales Product</h4>
+	<div class="card">
+		<div class="card-body">
+			<div>
+				<form method="post" id="edit_form" data-url="{% url 'sales-details-edit' id %}"
+					class="update-form">
+					{% csrf_token %}
+					<div class="form-row">
+						<div class="form-group col-md-4 mb-0">
+							{{ form.product_id|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.product_name|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.service_type|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.service_start_date|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.service_end_date|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.service_card_no|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.product_price|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.quantity|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.total_price|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.discount_rate|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.discount_amount|as_crispy_field }}
+						</div>
+						<div class="form-group col-md-4 mb-0">
+							{{ form.comments|as_crispy_field }}
+						</div>
+					</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Close</button>
+				<button type="submit" id="btnSubmit" class="btn btn-primary">Update</button>
+			</div>
+			</form>
+			<div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="{% static 'assets/javascript/pages/common-submit-editdata.js' %}"></script>

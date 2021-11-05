@@ -1,0 +1,4 @@
+<option value="">----------</option>
+{% for data in list_data %}
+<option value="{{ data.center_code }}">{{ data.branch_center_code }} - {{ data.center_name }}</option>
+{% endfor %}

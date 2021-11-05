@@ -1,0 +1,87 @@
+{% extends 'appauth/appauth-report-base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Balance Sheet (Asset & Liabilities) | {{ application_title }}
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'assets/stylesheets/report-page-a4-landscape.css' %}">
+{% endblock %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <div id="receiptData">
+
+        <page size="A4">
+            <div id="receipt-data">
+                <div class="text">
+                    <div class="inv-head">
+                        <div class="inv-right">
+                            <header class="receipt-header">
+                                <h2 class="store-name">{{ company_name }}</h2>
+                                <h4 class="store-name"> Statement of Financial Position </h4>
+                            </header>
+                        </div>
+                    </div>
+                    <div style="float: left; width: 100%;">
+
+                        <div style="width: 20%; float: left;">
+                            <p style="font-size: 14px; text-align: left;"><strong>Report Date : </strong> {{ p_ason_date}}</p>
+                        </div>
+                        <div style="width: 40%; float: left;">
+                            <p style="font-size: 14px; text-align: left;"><strong>Branch Name : </strong> {{p_branch_name }}</p>
+                        </div>
+                        <div style="width: 40%; float: right;">
+                            <p style="font-size: 14px; text-align: right;"><strong>Branch Address : </strong> {{p_branch_address }}</p>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+
+                    <table class="table table-striped table-condensed" id="report_table" width="98%"
+                        style="border-left: none !important;">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center col-xs-4" style="border-left:1px solid !important;">ASSET</th>
+                                <th class="text-center col-xs-0.5">This Date</th>
+                                <th class="text-center col-xs-0.5">This Month</th>
+                                <th class="text-center col-xs-0.5">Last Month</th>
+                                <th class="text-center col-xs-0.5">Last Year</th>
+                                <th class="text-center col-xs-4">LIABILITIES</th>
+                                <th class="text-center col-xs-0.5">This Date</th>
+                                <th class="text-center col-xs-0.5">This Month</th>
+                                <th class="text-center col-xs-0.5">Last Month</th>
+                                <th class="text-center col-xs-0.5">Last Year</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: transparent !important;">
+
+                            {% for rows in dtl_data %}
+
+                            <tr style="background-color: transparent !important;">
+                                <td style="{{ rows.asset_gl_level_class }} border-left:1px solid !important;">{{rows.asset_gl_name|default_if_none:"" }}</td>
+                                <td style="{{ rows.asset_gl_level_class }}" class="text-right">{{rows.asset_asof_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.asset_gl_level_class }}" class="text-right">{{rows.asset_this_month_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.asset_gl_level_class }}" class="text-right">{{rows.asset_past_month_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.asset_gl_level_class }}" class="text-right">{{rows.asset_past_year_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.liability_gl_level_class }}" class="text-left">{{rows.liability_gl_name|default_if_none:"" }}<br></td>
+                                <td style="{{ rows.liability_gl_level_class }}" class="text-right">{{rows.liability_asof_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.liability_gl_level_class }}" class="text-right">{{rows.liability_this_month_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.liability_gl_level_class }}" class="text-right">{{rows.liability_past_month_gl_balance|default_if_none:""|intcomma }}<br></td>
+                                <td style="{{ rows.liability_gl_level_class }}" class="text-right">{{rows.liability_past_year_gl_balance|default_if_none:""|intcomma }}<br></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </page>
+    </div>
+
+</div>
+{% endblock body %}

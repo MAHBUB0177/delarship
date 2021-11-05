@@ -1,0 +1,189 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Charges Parameter | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-fluid">
+            <div class="card-body">
+                <div>
+                    <form method="post" id="tran_table_data" data-url="{% url 'finance-charges-insert' %}"
+                        class="update-form">
+                        <div class="form-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-item col-md-10 mb-0">
+                                            <h3 class="card-title">
+                                                Charges List
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charges_code|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charges_name|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.actype_code|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charge_type|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charge_percentage|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charge_amount|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.account_opening_charge|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.account_closing_charge|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.status|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.effective_from_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.effective_upto_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charges_ledger_code|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charge_from_amount|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.charge_upto_amount|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.member_admission_fee|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.loan_application_fee|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.loan_insurance_fee|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.pass_book_fee|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.penal_charge|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.others_fee|as_crispy_field }}
+                                            </div>
+                                            <div class="form-item col-md-3 mb-0">
+                                                {{ form.comments|as_crispy_field }}
+                                            </div>
+
+                                        </div>
+                                        <button type="button" id="btnAddItem" class="btn btn-primary">Create Charges
+                                            Type</button>
+                                        <button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+                                            Charges Type</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app">
+
+        <div class="card card-fluid">
+            <div class="card-body">
+                <table id="dt-table-list" class="table dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>Charge Code </th>
+                            <th>Charges Name </th>
+                            <th>Account type</th>
+                            <th>Charge Type</th>
+                            <th>Charge Percentage</th>
+                            <th>From Amount</th>
+                            <th>Upto Amount</th>
+                            <th>Charge Amount</th>
+                            <th>AC Opening Charge</th>
+                            <th>AC Closing Charge</th>
+                            <th>Member Admission Fees</th>
+                            <th>Loan Application Fees</th>
+                            <th>Loan Insurance Fee </th>
+                            <th>Pass Book fee</th>
+                            <th>Penal Charge</th>
+                            <th>Others Fee</th>
+                            <th>Status</th>
+                            <th>Effective From Date</th>
+                            <th>Effective Upto Date</th>
+                            <th>Charge Ledger code</th>
+                            <th>Comments</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Charge Code </th>
+                            <th>Charges Name </th>
+                            <th>Account type</th>
+                            <th>Charge Type</th>
+                            <th>Charge Percentage</th>
+                            <th>From Amount</th>
+                            <th>Upto Amount</th>
+                            <th>Charge Amount</th>
+                            <th>AC Opening Charge</th>
+                            <th>AC Closing Charge</th>
+                            <th>Member Admission Fees</th>
+                            <th>Loan Application Fees</th>
+                            <th>Loan Insurance Fee </th>
+                            <th>Pass Book fee</th>
+                            <th>Penal Charge</th>
+                            <th>Others Fee</th>
+                            <th>Status</th>
+                            <th>Effective From Date</th>
+                            <th>Effective Upto Date</th>
+                            <th>Charge Ledger code</th>
+                            <th>Comments</th>
+                            <th>Action </th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit_model" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %}
+
+    {% block js %}
+    <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+    <script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+
+    <script src="{% static 'assets/javascript/pages/finance/finance-charges-createlist.js' %}"></script>
+    {% endblock %}
+    </body>

@@ -1,0 +1,38 @@
+<table id="data_table_sheet" class="table table-hover table-bordered table-sm">
+	<thead>
+		<tr>
+			<th>Serial</th>
+			<th>Account Number</th>
+			<th>Ledger Name</th>
+			<th>Debit/Credit</th>
+			<th>Tran Amount</th>
+			<th>Cancel Amount</th>
+			<th>Document Number</th>
+			<th>Tran Person</th>
+			<th>Tran Details</th>
+			<th>Tran By</th>
+			<th>Auth By</th>
+			<th>Cancel By</th>
+			<th>Cancel On</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for rows in data %}
+		<tr>
+			<td class="batch_serial" data-type="name">{{ rows.batch_serial }}</td>
+			<td class="account_number" data-type="name">{{ rows.account_number }}</td>
+			<td class="gl_name" data-type="inst">{{ rows.gl_name }}</td>
+			<td class="tran_debit_credit" data-type="inst">{{ rows.tran_debit_credit }}</td>
+			<td class="tran_amount" data-type="inst">{{ rows.tran_amount|default_if_none:"0.00"}}</td>
+			<td class="cancel_amount" data-type="inst">{{ rows.cancel_amount|default_if_none:"0.00"}}</td>
+			<td class="tran_document_number" data-type="inst">{{ rows.tran_document_number|default_if_none:"-" }}</td>
+			<td class="tran_person_phone" data-type="inst">{{ rows.tran_person_phone|default_if_none:"-" }}</td>
+			<td class="transaction_narration" data-type="inst">{{ rows.transaction_narration|default_if_none:"-"  }}</td>
+			<td class="app_user_id" data-type="inst">{{ rows.app_user_id|default_if_none:"-"  }}</td>
+			<td class="auth_by" data-type="inst">{{ rows.auth_by|default_if_none:"-"  }}</td>
+			<td class="cancel_by" data-type="inst">{{ rows.cancel_by|default_if_none:"-" }}</td>
+			<td class="cancel_on" data-type="inst">{{ rows.cancel_on|default_if_none:"-"  }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>

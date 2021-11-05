@@ -1,0 +1,174 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+sales quation | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+<div id="alert-item">
+
+</div>
+	<div class="app">
+		<div class="page">
+
+			<div class="card card-fluid">
+				<div class="card-body">
+					<div class="form-group">
+						<div class="card">
+							<div class="card-body">
+	
+
+								<div>
+								<div>
+								<h6>Sales Quotion</h6>
+
+								</div>
+									<form method="post" id="id_master_forms"
+										data-url="{% url 'sales-quatation-master-insert' %}" class="update-form">
+										<div class="form-group">
+											{% csrf_token %}
+											<div class="form-row">
+												
+												<div class="form-group col-md-3 mb-0">
+													{{ form_master.supplier_id | as_crispy_field }}
+												</div>
+												 
+												<div class="form-group col-md-3 mb-0">
+													{{ form_master.vat_condition | as_crispy_field }}
+												</div>
+												
+												<div class="form-group col-md-2 mb-0">
+													{{ form_master.quotation_validity|as_crispy_field }}
+												</div>
+												<div class="form-group col-md-2 mb-0">
+													{{ form_master.warranty|as_crispy_field }}
+												</div>
+                        <div class="form-group col-md-2 mb-0">
+													{{ form_master.subject|as_crispy_field }}
+												</div>
+                                                                                                
+                          <div class="form-group col-md-2 mb-0">
+													{{ form_master.quotation_date|as_crispy_field }}
+												</div>
+												<div class="form-group col-md-2 mb-0">
+													{{ form_master.remarks|as_crispy_field }}
+												</div>
+
+												<div class="form-group col-md-2 mb-0">
+													{{ form_master.edd_date|as_crispy_field }}
+												</div>
+												<input type='hidden' id='id_quotation_id' name='quotation_id' value='' readonly>
+												<input type='hidden' id='id_product_id2' name='product_id' value='' readonly>
+
+											</div>      
+											 <button class="btn btn-primary " id="btn_param_sumbit" type="submit">Submit </button>
+                    </div>
+
+									</form>
+									<div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title"> Add Item </h4>
+							<form method="post" id="details_forms" data-url="{% url 'sales-quatation-dtl-insert' %}"
+								class="update-form">
+								<div class="form-group">
+									{% csrf_token %}
+									<div class="form-row">
+										<div class="form-group col-md-2 mb-0">
+											{{ form_details.product_id|as_crispy_field }}
+										</div>
+										<div class="form-group col-md-3 mb-0">
+											{{ form_details.unit | as_crispy_field }}
+										</div>
+										<div class="form-group col-md-3 mb-0">
+											{{ form_details.quantity | as_crispy_field }}
+										</div>
+										<div class="form-group col-md-3 mb-0">
+											{{ form_details.unit_price|as_crispy_field }}
+										</div>
+										<div class="form-group col-md-2 mb-0">
+											{{ form_details.total_price|as_crispy_field }}
+										</div>
+										<div class="form-group col-md-2 mb-0">
+											{{ form_details.quotation_date|as_crispy_field }}
+										</div>
+										
+									
+									</div>
+									<div class>
+										<button type="button" id="btnAddItem" class="btn btn-primary">Submit</button>
+										<button type="button" id="btnSearch" class="btn btn-primary">Search</button>
+
+										
+									</div>  
+								</div>
+							</form>
+						</div>
+					</div>
+
+
+					<header class="card-title-bar">
+						<h3 class="card-title text-center"> Item List </h3>
+					</header>
+
+					<div class="card card-fluid">
+						<div class="card-body">
+							<table id="dt-table-list" class="table dt-responsive nowrap w-100">
+								<thead>
+									<tr>
+										<th> Product ID </th>
+										<th> Quantity </th>
+										<th> Unit </th>
+										<th> Unit Price </th>
+										<th> Total Price </th>
+										<th> Action</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th> Product ID </th>
+										<th> Quantity </th>
+										<th> Unit </th>
+										<th> Unit Price </th>
+										<th> Total Price </th>
+										<th> Action</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+					<div class="modal fade" id="edit_model" role="dialog">
+						<div class="modal-dialog modal-lg">
+							<div class="modal-content">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock body %}
+
+
+{% block js %}
+<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+<script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/sales/sales-quatation-master-createlist.js' %}"></script>
+{% endblock %}
+</body>
+

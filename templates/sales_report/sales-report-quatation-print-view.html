@@ -1,0 +1,147 @@
+{% extends 'appauth/appauth-report-base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Sales Quotation Report  | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <div id="receiptData">
+
+        <page size="A4">
+            <div id="receipt-data">
+                <div class="text">
+                    <div class="inv-head">
+                        <div class="inv-right">
+                            <header class="receipt-header">
+                                <h2 class="store-name">{{ company_name }}</h2>
+				<h4 class="store-name"> Sales Quotation Report </h4>
+                            </header>
+                        </div>
+                    </div>
+                    <div style="float: left; width: 100%;">
+
+                                <div style="width: 70%; float: left;">
+                                    {% for rows in dtl_data %}
+                                 <p>pbm/offer/nar{{rows.quotation_date}}</p>
+                                 <p>To</p>
+                                 <p>{{ company_name }}</p>
+                                 <p>{{ company_address }}</p>
+                                 <p style="font-weight: bold;">sub:{{rows.subject}}</p>
+                                {% endfor %}
+                                </div>
+                                <div  style="width: 30%; float: left;">
+                                    {% for rows in dtl_data %}
+                                  <p>Date:{{ rows.quotation_date}}</p>
+                                  <p>Phone:{{company_mobile}}</p>
+                                  <p>Email:{{company_email}}</p>
+                                  {% endfor %}
+
+                                </div>
+
+                    </div>
+                    
+                    <div>
+                        <p>Dear Sir,</p>
+                        <p>this is a international technology and information company which is service proficiently too good and they serve their customer very proudly.</p>
+                </div>
+                 
+                    <div>
+                        <hr>
+                        <h4 style="text-align: center;">QUOTATION</h1>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <table class="table table-striped table-condensed" width="1000px"
+                        style="border-left: none !important;">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center col-xs-0.5" style="border-left:1px solid !important;">SL</th>
+                                <th class="text-center col-xs-7" style="font-size: 12px;"><strong>Item Description</strong> </th>
+                                <th class="text-center col-xs-3"style="font-size: 12px;">Qty</th>
+				                <th class="text-center col-xs-5"style="font-size: 12px;">Unit </th>
+				                <th class="text-center col-xs-5"style="font-size: 12px;">Unit Price(BDT) </th>
+                                <th class="text-center col-xs-5"style="font-size: 12px;">Total Price(BDT)</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: transparent !important;">
+
+                            {% for rows in dtl_data %}
+
+                            <tr style="background-color: transparent !important;">
+                                <td style="border-left:1px solid !important;">{{ forloop.counter }}</td>
+                                <td class="text-left">{{ rows.product_name }}<br></td>
+                                <td class="text-left">{{ rows.quantity }}</td>
+                                <td class="text-center">{{ rows.unit_name }}</td>
+                                <td class="text-right">{{ rows.unit_price|default_if_none:"0.00"|intcomma  }}</td>
+				                <td class="text-center">{{ rows.total_price|default_if_none:"" }}</td>
+				
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                            {% for rows in sum_data %}
+                            
+                                <tr>
+                                        <th colspan="5" class="text-right" style="border:none !important;"> Total :</th>
+                                        <th colspan="1" class="text-right" style="border:none !important;"> {{ rows.price}}:</th>
+                                </tr>
+                                {% endfor %}
+                               
+                               
+                        </tfoot>
+                    </table>
+
+                    <div>
+                            <p>in-word:Twenty five hundred</p>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-1"></div>
+                            
+                            <div class="col-md-11">
+                                {% for rows in dtl_data %}
+                                    <p>VAT & TAX:{{rows.vat_condition}}</p>
+                                    <p>Validity:{{rows.quotation_validity}}</p>
+                                    <p>Payment:100% advance payment along with work order.</p>
+                                    <p>Warranty:{{rows.warranty}}</p>
+                                    <p>Others:clients should be responsile from other formalities</p>
+                                {% endfor %}
+                            </div>
+                           
+                            <div class="ok" style="margin-top: 20px;">
+                                <p>Thanking You</p>
+                                <p>For Pert Technology Ltd</p>
+
+                            </div>
+
+                    </div>
+                    <footer class="float-right" style="margin-top: 30px;">
+                        <div style="float: left; width: 100%;">
+                            <div style="width: 35%; float: left;">
+                                <p style="font-size: 14px; font-weight: bold; border-top: 1px solid black; text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;Prepared by</p>
+                                <p><a href="#">Email {{company_email}}</a></p>
+                            </div>
+                            <div style="width: 30%; float: left;">
+                                <p>&nbsp;</p>
+                            </div>
+                            <div style="width: 35%; float: left;">
+                                <p style="font-size: 14px; font-weight: bold; border-top: 1px solid black; text-align: center;">Manager</p>
+                                <p ><a href="#" > Email {{company_email}}</a></p>
+                            </div>
+                        </div>
+                    </footer>
+
+                    
+                </div>
+            </div>
+        </page>
+    </div>
+
+</div>
+{% endblock body %}

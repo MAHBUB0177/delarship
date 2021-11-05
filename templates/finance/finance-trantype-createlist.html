@@ -1,0 +1,146 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Manage Transaction Type| {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-fluid">
+			<div class="card-body">
+				<div>
+					<form method="post" id="tran_table_data" data-url="{% url 'finance-trantype-insert' %}"
+						class="update-form">
+						<div class="form-group">
+							<div class="card">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-10 mb-0">
+											<h3 class="card-title"> Manage Transaction Type </h3>
+										</div>
+									</div>
+									<div>
+										{% csrf_token %}
+										<div class="form-row">
+											<div class="form-group col-md-4 mb-0">
+												{{ form.tran_type_name|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.tran_type_code|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.credit_gl_code|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.debit_gl_code|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.transaction_screen|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.transaction_table|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.transaction_from_table|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.default_debit_credit|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.transaction_client_type|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.tran_account_type|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.tran_debit_account_type|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.debit_allowed|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.credit_allowed|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.is_account_required|as_crispy_field }}
+											</div>
+											<div class="form-group col-md-4 mb-0">
+												{{ form.is_document_required|as_crispy_field }}
+											</div>
+										</div>
+										<button type="button" id="btnAddRecord" class="btn btn-primary">Create New
+											Transaction Type</button>
+										<button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+											Transaction Type</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="app">
+
+			<div class="card card-fluid">
+				<div class="card-body">
+					<table id="dt-table-list" class="table dt-responsive nowrap w-100">
+						<thead>
+							<tr>
+								<th> Type Code </th>
+								<th> Type Name </th>
+								<th> Credit Ledger</th>
+								<th> Debit Ledger</th>
+								<th> Transaction Screen </th>
+								<th> Status </th>
+								<th> Account Type </th>
+								<th> Debit</th>
+								<th> Credit </th>
+								<th> Phone Required </th>
+								<th> Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th> Type Code </th>
+								<th> Type Name </th>
+								<th> Credit Ledger</th>
+								<th> Debit Ledger</th>
+								<th> Transaction Screen </th>
+								<th> Status </th>
+								<th> Account Type </th>
+								<th> Debit</th>
+								<th> Credit </th>
+								<th> Phone Required </th>
+								<th> Action</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="edit_model" role="dialog">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+	{% endblock body %}
+
+	{% block js %}
+	<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+	<script src="{% static 'assets/javascript/pages/finance/finance-trantype-createlist.js' %}"></script>
+	{% endblock %}
+</div>

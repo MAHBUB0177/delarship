@@ -1,0 +1,144 @@
+{% extends 'appauth/appauth-report-base.html' %}
+{% load static %}
+
+{% block title %}
+Order {{ order_number }} | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <div id="receiptData">
+
+        <page size="A4">
+            <div id="receipt-data">
+                <div class="text">
+                    <div class="inv-head">
+                        <div class="inv-right">
+                            <header class="receipt-header">
+                                <h2 class="store-name">{{ company_name }}</h2>
+                                <div class="address-area">
+                                    <span class="info address">{{ company_address }}</span>
+                                    <div class="block">
+                                        <!--span class="info phone">Mobile: {{ company_mobile|default_if_none:"" }}</span-->,
+                                        <span class="info email">Email: {{ company_email|default_if_none:"" }}</span>
+                                    </div>
+                                </div>
+                            </header>
+                        </div>
+                    </div>
+                    <span style="float:left">
+                        {% for rows in row %}
+                        <p>
+                            Order No : <span id="id_order_number">{{ rows.order_number }}</span><br>
+                            Customer Name : {{ rows.customer_name|default_if_none:"" }} <br>
+                            Contact No : {{ rows.customer_phone|default_if_none:"" }} <br>
+                            Address : {{ rows.customer_address|default_if_none:"" }} <br>
+                           
+                        </p>
+                        {% endfor %}
+                    </span>
+                    <span style="float:right;">
+                        <p>
+                            {% for rows in row %}
+
+                        Date : {{ rows.order_date }}<br>
+                        {% endfor %}
+                    </p>
+                    </span>
+
+                    <div style="clear:both;"></div>
+                    <table class="table table-striped table-condensed" id="report_table" width="1000px"
+                        style="border-left: none !important;">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center col-xs-1" style="border-left:1px solid !important;">SL</th>
+                                <th class="text-center col-xs-6">Product Name </th>
+                                <th class="text-center col-xs-2">Price</th>
+                                <th class="text-center col-xs-1">Quantity</th>
+                                <th class="text-center col-xs-3">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: transparent !important;">
+
+                            {% for rows in row %}
+
+                            <tr style="background-color: transparent !important;">
+                                <td style="border-left:1px solid !important;">{{  forloop.counter}}</td>
+                                <td class="text-left">{{ rows.product_name }}<br></td>
+                                <td class="text-right">{{ rows.product_price }}</td>
+                                <td class="text-center">{{ rows.ordered_quantity }}</td>
+                                <td class="text-right">{{ rows.ordered_total_price }}</td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+                            {% for rows in row %}
+                            <tr>
+                                <th colspan="" style="border:none !important;"></th>
+                                <th colspan="2" class="text-right" style="border:none !important;">Total Bill Amount
+                                </th>
+                                <th style="border:none !important;">------</th>
+                                <th colspan="2" class="text-right" style="border:none !important;">
+                                    {{ rows.total_bill_amount }}</th>
+                            </tr>
+
+                            <tr>
+                                <th style="border:none !important;"></th>
+                                <th colspan="2" class="text-right" style="border:none !important;">Total Discount
+                                </th>
+                                <th style="border:none !important;">------</th>
+                                <th colspan="2" class="text-right" style="border:none !important;">
+                                    {{ rows.total_discount_amount }} </th>
+
+                            </tr>
+                            <tr>
+                                <th style="border:none !important;"></th>
+                                <th colspan="2" class="text-right" style="border:none !important;">Bill After Discount
+                                </th>
+                                <th style="border:none !important;">------</th>
+                                <th colspan="2" class="text-right" style="border:none !important;">{{ rows.bill_after_discount }}
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th style="border:none !important;"></th>
+                                <th colspan="2" class="text-right" style="border:none !important;">Total Pay
+                                </th>
+                                <th style="border:none !important;">------</th>
+                                <th colspan="2" class="text-right" style="border:none !important;">{{ rows.pay_amount }}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="border:none !important;"></th>
+                                <th colspan="2" class="text-right" style="border:none !important;">Total Due
+                                </th>
+                                <th style="border:none !important;">------</th>
+                                <th colspan="2" class="text-right" style="border:none !important;">{{ rows.due_amount }}
+                                </th>
+
+                            </tr>
+                            {% endfor %}
+                        </tfoot>
+                    </table>
+                </div>
+                <br>
+                <br>
+                <div class="well well-sm">
+                    <center><span> {{ invoice_line1 }} <br>
+                            <div> {{ invoice_line2 }} </div>
+                            <div>{{ invoice_line3 }}</div> <span></span>
+                    </span></center>
+                </div>
+            </div>
+
+            <div style="clear:both;"></div>
+        </page>
+    </div>
+
+</div>
+{% endblock body %}

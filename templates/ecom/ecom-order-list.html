@@ -1,0 +1,276 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Online Order List | {{ application_title }}
+{% endblock %}
+
+{% block upperjs %}
+
+<script>
+
+  function calculfac() {
+    var quantity = Number(0);
+    var total_quantity = Number(0);
+    var total_total_price = Number(0);
+    var total_discount_amount = Number(0);
+    var total_price_after_discount = Number(0);
+    $('table tr').each(function () {
+
+      //var quantity = parseInt($(this).closest('tr').find('td:eq(2)').find('input').val());
+      var quantity = parseInt($(this).closest('tr').find('td:eq(2)').find('input').val());
+      var unit_price = parseInt($(this).closest('tr').find('td:eq(3)').find('input').val());
+      if (isNaN(quantity)) {
+        quantity = 0;
+      }
+      if (isNaN(unit_price)) {
+        unit_price = 0;
+      }
+      var total_price = quantity * unit_price;
+      if (isNaN(total_price)) {
+        total_price = 0;
+      }
+      var discount_rate = parseFloat($(this).closest('tr').find('td:eq(5)').find('input').val());
+
+      if (discount_rate > -1) {
+        var discount_amount = (total_price * discount_rate) / 100;
+        $(this).closest('tr').find('td:eq(6)').find('input').val(discount_amount.toFixed(0));
+      } else {
+        var discount_amount = parseFloat($(this).closest('tr').find('td:eq(6)').find('input').val());
+      }
+
+      if (isNaN(discount_rate)) {
+        discount_rate = 0;
+      }
+
+      if (isNaN(discount_amount)) {
+        discount_amount = 0;
+      }
+      var price_after_discount = total_price - discount_amount;
+
+      if (isNaN(price_after_discount)) {
+        price_after_discount = 0;
+      }
+      
+      $('.total_price', this).text(total_price.toFixed(2));
+      $('.sales_amount', this).text(Math.round(price_after_discount).toFixed(2));
+
+      if (discount_amount > (total_price)) {
+        alert('Total discount should not more then total price!');
+        $(this).closest('tr').find('td:eq(6)').find('input').val(0);
+      }
+
+      total_quantity = total_quantity + quantity;
+      total_total_price = total_total_price + total_price;
+      total_discount_amount = total_discount_amount + discount_amount;
+      total_price_after_discount = total_price_after_discount + price_after_discount;
+
+    });
+    //$('table tfoot th').eq(2).text(total_quantity);
+    $('tfoot th#total_quantity').text(total_quantity);
+    $('tfoot th#total_total_price').text(total_total_price.toFixed(2));
+    //$('table tfoot th').eq(6).text(total_discount_amount);
+    $('tfoot th#total_discount_amount').text(total_discount_amount.toFixed(0));
+    $('tfoot th#total_price_after_discount').text(Math.round(total_price_after_discount).toFixed(2));
+    //Dalivery-charge
+    var Dalivery_charge =$('#Dalivery-charge').text()
+    // Coupan
+    var total_dis=$('#totalDis').val();
+    var coupan_dis=0
+    if(total_dis){
+      coupan_dis=Number(total_dis)-total_discount_amount
+    }
+    $('#coupan-dis').text(Math.round(coupan_dis).toFixed(2))
+    $('#payable-price').text(Math.round((total_total_price+Number(Dalivery_charge))-(coupan_dis+total_discount_amount)).toFixed(2))
+  }
+
+  function saveData() {
+    var order_number = document.getElementById('id_detail_order_number').value;
+    var rows = [];
+    $("tbody tr").each(function () {
+      var cur = {};
+      var product_id = $('.product_id', this).text();
+      var quantity = parseInt($(this).closest('tr').find('td:eq(2)').find('input').val());
+      var unit_price = parseInt($(this).closest('tr').find('td:eq(3)').find('input').val());
+      var total_price = $('.total_price', this).text();
+      var discount_rate = parseInt($(this).closest('tr').find('td:eq(5)').find('input').val());
+      var discount_amount = parseInt($(this).closest('tr').find('td:eq(6)').find('input').val());
+      var sales_amount = $('.sales_amount', this).text();
+      if (isNaN(quantity)) {
+        quantity = 0;
+      }
+      if (isNaN(unit_price)) {
+        unit_price = 0;
+      }
+      if (isNaN(total_price)) {
+        total_price = 0;
+      }
+      if (isNaN(discount_rate)) {
+        discount_rate = 0;
+      }
+      if (isNaN(discount_amount)) {
+        discount_amount = 0;
+      }
+      if (isNaN(sales_amount)) {
+        sales_amount = 0;
+      }
+      cur['product_id'] = product_id;
+      cur['order_number'] = order_number;
+      cur['quantity'] = quantity;
+      cur['unit_price'] = unit_price;
+      cur['total_price'] = total_price;
+      cur['discount_rate'] = discount_rate;
+      cur['discount_amount'] = discount_amount;
+      cur['sales_amount'] = sales_amount;
+      rows.push(cur);
+      cur = {};
+    });
+    submit_data_table(rows);
+
+  }
+
+  function submit_data_table(data) {
+    var data_string = JSON.stringify(data);
+    var data_url = 'sales-order-details-update';
+    $.ajax({
+      url: data_url,
+      data: {
+        "data_string": data_string
+      },
+      type: 'POST',
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          alert(data.success_message);
+          $('#view_details').modal('hide');
+        } else {
+          alert(data.error_message);
+        }
+      }
+    })
+    return false;
+  }
+
+</script>
+{% endblock %}
+
+{% block body %}
+
+<body>
+  <div class="app">
+    <div class="page">
+
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h4 class="card-title"> Sales Order List </h4>
+                <form>
+                  <div class="form-row">
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.order_number | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.customer_phone | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.executive_phone | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.from_date | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.upto_date | as_crispy_field }}
+                    </div>
+                    <input type='hidden' id='id_detail_order_number' name='detail_order_number' value='' readonly>
+                  </div>
+                  <button type="button" id="btnSearch" class="btn btn-info pull-right"> Search Order List</button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <header class="card-title-bar">
+            <h3 class="card-title text-center"> Order List</h3>
+          </header>
+          <div class="card card-fluid">
+            <div class="card-body">
+              <table id="dt-invoice-list" class="table dt-responsive nowrap w-100">
+                <thead>
+                  <tr>
+                    <th> Order Number </th>
+                    <th> Order Date </th>
+                    <th> Customer Name </th>
+                    <th> Customer Phone </th>
+                    <th> Executive Phone </th>
+                    <th> Quantity </th>
+                    <th> Bill Amount </th>
+                    <th> Payment </th>
+                    <th> Advance Pay </th>
+                    <th> Discount Amount</th>
+                    <th> Status </th>
+                    <th> Comments</th>
+                    <th> Action</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th> Order Number </th>
+                    <th> Order Date </th>
+                    <th> Customer Name </th>
+                    <th> Customer Phone </th>
+                    <th> Executive Phone </th>
+                    <th> Total Quantity </th>
+                    <th> Bill Amount </th>
+                    <th> Payment </th>
+                    <th> Advance Pay </th>
+                    <th> Discount Amount</th>
+                    <th> Status </th>
+                    <th> Comments</th>
+                    <th> Action</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="modal fade" id="view_details" role="dialog">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-center">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div id="data_table_sheet">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}
+
+  {% block js %}
+
+  <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+  <script src="{% static 'assets/javascript/pages/ecom/ecom-order-list.js' %}"></script>
+
+  {% endblock %}
+</body>

@@ -1,0 +1,253 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Create Order | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="page has-sidebar has-sidebar-expand-lg">
+	<div class="page-inner">
+
+		<div class="d-flex justify-content-between align-items-center">
+			<button type="button" class="btn btn-light btn-icon d-xl-none" data-toggle="sidebar"><i
+					class="fa fa-angle-double-left"></i></button>
+		</div>
+		<form method="post" id="sales_details_form" data-url="{% url 'sales-details-entry' %}" class="update-form">
+			<div class="form-row">
+				<div class="card card-fluid">
+					<div class="card-body">
+
+						<h3 class="card-title"> Create Order </h3>
+						<div>
+							{% csrf_token %}
+							<div class="form-row">
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.product_id|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.product_bar_code|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.quantity|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.product_price|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.discount_rate|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.discount_amount|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.total_price|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.stock_available|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.sales_account_number|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.details_branch_code|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.product_model|as_crispy_field }}
+								</div>
+								<div class="form-group col-md-3 mb-0">
+									{{ sales_details.product_name|as_crispy_field }}
+								</div>
+							</div>
+							<button type="button" id="btnAddItem" class="btn btn-primary">Add to Cart</button>
+							<button type="button" id="btnClearItem" class="btn btn-warning">Clear My Cart</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="card card-fluid">
+			<div class="card-body">
+				<table id="dt-product-list" class="table dt-responsive nowrap w-100">
+					<thead>
+						<tr>
+							<th> Product Model </th>
+							<th> Product Name </th>
+							<th> Price </th>
+							<th> Quantity </th>
+							<th> Total Price </th>
+							<th> Discount Amount</th>
+							<th> Discount Rate </th>
+							<th> Action</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th> Product Model </th>
+							<th> Product Name </th>
+							<th> Price </th>
+							<th> Quantity </th>
+							<th> Total Price </th>
+							<th> Discount Amount</th>
+							<th> Discount Rate </th>
+							<th> Action</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+
+		<div class="page-sidebar">
+			<header class="sidebar-header d-sm-none">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item active">
+							<a href="#" onclick="Looper.toggleSidebar()"><i
+									class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+						</li>
+					</ol>
+				</nav>
+			</header>
+			<div class="sidebar-section-fill">
+				<div class="card card-reflow">
+					<div class="card-body">
+						<button type="button" class="close mt-n1 d-none d-xl-none d-sm-block"
+							onclick="Looper.toggleSidebar()" aria-label="Close"><span
+								aria-hidden="true">×</span></button>
+						<h4 class="card-title"> Order Summary </h4>
+						<div class="row">
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_total_bill_amount"></h6>
+									<p class="metric-label mt-1"> Total Bill Amount </p>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_total_discount_amount"></h6>
+									<p class="metric-label mt-1"> Discount Amount </p>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_total_quantity"></h6>
+									<p class="metric-label mt-1"> Total Quantity </p>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_total_product_price"></h6>
+									<p class="metric-label mt-1"> Bill After Discount </p>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_customer_balance"></h6>
+									<p class="metric-label mt-1"> Customer Balance </p>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="metric">
+									<h6 id="id_total_due_amount"></h6>
+									<p class="metric-label mt-1"> Due Amount </p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="card-body border-top pb-1">
+						<h4 class="card-title"> Customer Details </h4>
+						<form method="post" id="sales_master_form" data-url="{% url 'sales-order-post' %}"
+							class="update-form">
+							<div class="form-group">
+
+								{% csrf_token %}
+								<div class="form-row">
+									{% if is_head_office_user %}
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.branch_code | as_crispy_field }}
+									</div>
+									{% else %}
+									<input type='hidden' id='id_branch_code' name='branch_code' value={{
+										global_branch_code }} readonly>
+									{% endif %}
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.type_code|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.tran_type_code|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.account_number|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-0 mb-0">
+										{{ sales_master.customer_id|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.customer_phone|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.customer_name|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.customer_address|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.center_code|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.employee_id|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.pay_amount|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.order_date|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.total_discount_rate|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.total_discount_amount|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.input_account_number|as_crispy_field }}
+									</div>
+									<div class="form-group col-md-12 mb-0">
+										{{ sales_master.delivary_date|as_crispy_field }}
+									</div>
+								</div>
+								<button type="button" id="btnSubmitOrder" class="btn btn-success">Submit Order</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="product_edit" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+
+	{% endblock body %}
+
+	{% block js %}
+
+	<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+	<script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/sales/sales-order-create.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/sales/sales-accounts-search.js' %}"></script>
+
+	{% endblock %}
+	</body>

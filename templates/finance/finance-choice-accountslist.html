@@ -1,0 +1,4 @@
+<option value="">----------</option>
+{% for data in list_data %}
+<option value="{{ data.account_number }}">{{ data.account_title }} - {{ data.phone_number }} - {{ data.account_address }}</option>
+{% endfor %}

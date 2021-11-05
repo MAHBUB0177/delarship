@@ -1,0 +1,39 @@
+class Purchase_Order_Mst(models.Model):
+branch_code = models.CharField(max_length=20, null=True, blank=True)
+purchase_ord_no = models.CharField(max_length=20, null=True, blank=True)
+purchase_type = models.CharField(max_length=20, null=True, blank=True)
+purchase_date = models.DateField()
+supplier_id = models.CharField(max_length=20, null=False)
+ed_date  = models.DateField()
+g_total_price = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+total_pur_qnty  models.IntegerField(blank=True)
+pur_subject = models.CharField(max_length=200, null=False)
+app_user_id = models.CharField(max_length=20, null=False)
+app_data_time = models.DateTimeField(auto_now_add=True)
+
+class Purchase_Order_Dtl(models.Model):	
+product_id  = models.CharField(max_length=20, null=True, blank=True)
+origin  = models.CharField(max_length=20, null=True, blank=True)
+pur_qnty  models.IntegerField(blank=True)
+unit_price = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+total_price = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+		
+		
+class Purchase_Bill(models.Model):
+purchase_ord_no  = models.CharField(max_length=20, null=True, blank=True)
+bill_date  = models.DateField()
+supllier_id = models.CharField(max_length=20, null=False)
+bill_id = models.CharField(max_length=20, null=False)
+submission_date  = models.DateField()
+bill_amount  = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+payment_amount = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+pending_amount = models.DecimalField(
+        null=True, max_digits=22, decimal_places=2, default=0.00, blank=True)
+remarks = models.CharField(max_length=200, null=False)
+app_user_id = models.CharField(max_length=20, null=False)
+app_data_time = models.DateTimeField(auto_now_add=True)

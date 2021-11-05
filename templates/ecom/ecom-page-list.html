@@ -1,0 +1,62 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Online Product Details | {{ application_title }}
+{% endblock %}
+{% block upperjs %}
+{% endblock %}
+
+{% block body %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page List</title>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      Page List
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tr>
+          <th>Page Title</th>
+          <th>Short Text</th>
+          <th>Action</th>
+        </tr>
+      {% for page in pages %}
+        <tr>
+          <td>{{page.title}}</td>
+          <td>
+            {% autoescape off %}
+              {{ page.content |striptags|truncatechars:250 }}
+            {% endautoescape %}
+          </td>
+          <td>
+            <a href="/ecom-edit-page/{{page.pk}}" class="btn btn-primary">View</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+{% endblock body %}
+
+{% block js %}
+<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+<!-- <script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script> -->
+<script src="{% static 'assets/tinymce/tinymce.min.js' %}"></script>
+
+<script src="{% static 'assets/javascript/pages/ecom/ecom-products-update.js' %}"></script>
+{% endblock %}
+</body>

@@ -1,0 +1,181 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Purchase Entry | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="app">
+        <div class="page">
+
+            <div class="card card-fluid">
+                <div class="card-body">
+                    
+                    <div class="form-group">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="form-group col-md-10 mb-0">
+                                        <h3 class="card-title"> Purchase Entry </h3>
+                                    </div>
+                                    <div class="form-group col-md-2 mb-0">
+                                        <button class="btn btn-primary " id="btn_stock_sumbit" type="submit">Submit
+                                            Purchase</button>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <form method="post" id="stock_master_post"
+                                        data-url="{% url 'sales-quickpurchase-post' %}" class="update-form">
+                                        <div class="form-group">
+                                            {% csrf_token %}
+                                            <div class="form-row">
+                                                {% if is_head_office_user %}
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.branch_code | as_crispy_field }}
+                                                </div>
+                                                {% else %}
+                                                <input type='hidden' id='id_branch_code' name='branch_code' value={{ global_branch_code }} readonly>
+                                                {% endif %}
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.account_number|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.stock_date|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.receipt_payment_ledger|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.voucher_number|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.total_quantity|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.total_price|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.total_pay|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.due_amount|as_crispy_field }}
+                                                </div>
+                                                <div class="form-group col-md-2 mb-0">
+                                                    {{ stock_master.comments|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"> Add Item </h4>
+                                <form method="post" id="stock_master_form"
+                                    data-url="{% url 'sales-purchase-dtlsinsert' %}" class="update-form">
+                                    <div class="form-group">
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            <div class="form-group col-md-3 mb-0">
+                                                {{ stock_detail_temp.product_id|as_crispy_field }}
+                                            </div>
+                                            {% if is_barcode_enable %}
+                                            <div class="form-group col-md-2 mb-0">
+                                                {{ stock_detail_temp.product_bar_code | as_crispy_field }}
+                                            </div>
+                                            {% else %}
+                                            <input type='hidden' id='id_product_bar_code' name='product_bar_code'
+                                                value='' readonly>
+                                            {% endif %}
+                                            <div class="form-group col-md-2 mb-0">
+                                                {{ stock_detail_temp.quantity|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-2 mb-0">
+                                                {{ stock_detail_temp.purces_price|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-2 mb-0">
+                                                {{ stock_detail_temp.dtl_total_price|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-2 mb-0">
+                                                {{ stock_detail_temp.discount_amount|as_crispy_field }}
+                                            </div>
+                                            <input type='hidden' id='id_branch_code' name='branch_code' value={{ global_branch_code }} readonly>
+                                        </div>
+                                        <div class>
+                                            <button type="button" id="btnAddItem" class="btn btn-primary">Add Item</button>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+
+                        <header class="card-title-bar">
+                            <h3 class="card-title text-center"> Product List </h3>
+                        </header>
+                        <div class="card card-fluid">
+                            <div class="card-body">
+                                <table id="dt-table-list" class="table dt-responsive nowrap w-100">
+                                    <thead>
+                                        <tr>
+                                            <th> Product ID </th>
+                                            <th> Product Name </th>
+                                            <th> Product Model </th>
+                                            <th> Quantity </th>
+                                            <th> Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th> Product ID </th>
+                                            <th> Product Name </th>
+                                            <th> Product Model </th>
+                                            <th> Quantity </th>
+                                            <th> Action</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="edit_model" role="dialog">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endblock body %}
+
+                    {% block js %}
+
+                    <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+                    <script
+                        src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+                    <script
+                        src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+                    <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+                    <script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script>
+                    <script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+                    <script src="{% static 'assets/javascript/pages/sales/sales-quickpurchase-master.js' %}"></script>
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

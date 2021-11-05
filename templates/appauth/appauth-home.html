@@ -1,0 +1,1031 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title> {% block title %} Home | {{ application_title }} {% endblock %}
+  </title>
+  <meta property="og:title" content="Dashboard">
+  <meta name="author" content="Peart Technology Limited">
+  <meta property="og:locale" content="en_US">
+  <meta name="description" content="Sales ERP (Bechakena360)">
+  <meta property="og:description" content="Sales ERP (Bechakena360)">
+  <meta property="og:site_name" content="Sales ERP (Bechakena360)">
+  <script type="application/ld+json">
+    </script>
+  <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/web-icon.png' %}">
+  <link rel="shortcut icon" href="{% static 'assets/web-icon.png' %}">
+  <meta name="theme-color" content="#3063A0">
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'assets/vendor/open-iconic/css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/fontawesome/css/all.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/select2/css/select2.min.css' %}">
+  <link rel="stylesheet"
+    href="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.css' %}">
+
+  <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min.css' %}" data-skin="default">
+  <link rel="stylesheet" href="{% static 'assets/stylesheets/theme-dark.min.css' %}" data-skin="dark">
+  <link rel="stylesheet" href="{% static 'assets/stylesheets/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/vendor/flatpickr/flatpickr.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/copper/cropper.min.css' %}">
+  <script>
+    var skin = localStorage.getItem('skin') || 'default';
+    var unusedLink = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+    unusedLink.setAttribute('rel', '');
+    unusedLink.setAttribute('disabled', true);
+  </script>
+  {% block upperjs %}
+
+  {% endblock %}
+</head>
+
+<body>
+  <div class="app">
+    <header class="app-header app-header-dark">
+      <div class="top-bar">
+        <div class="top-bar-brand">
+          <a href="{% url 'appauth-home' %}">
+            <svg width="200" height="80" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <defs>
+                <path
+                  d="m156.538,45.644l0,1.04a6.347,6.347 0 0 1 -1.847,3.98l-26.983,27.006a6.338,6.338 0 0 1 -3.862,1.839l-1.272,0a6.34,6.34 0 0 1 -3.862,-1.839l-26.984,-27.006a6.353,6.353 0 0 1 0,-9l9.11,-9.117l-2.136,-2.138a3.171,3.171 0 0 0 -4.498,0l-13.493,13.504a3.177,3.177 0 0 0 -0.043,4.453l-0.002,0.003l0.048,0.047l24.733,24.754l-4.497,4.5a6.339,6.339 0 0 1 -3.863,1.84l-1.27,0a6.337,6.337 0 0 1 -3.863,-1.84l-26.983,-27.005a6.353,6.353 0 0 1 0,-9l26.983,-27.008a6.336,6.336 0 0 1 4.498,-1.869c1.626,0 3.252,0.622 4.498,1.87l26.986,27.006a6.353,6.353 0 0 1 0,9l-9.11,9.117l2.136,2.138a3.171,3.171 0 0 0 4.498,0l13.49,-13.504a3.177,3.177 0 0 0 0.046,-4.453l0.002,-0.002l-0.047,-0.048l-24.737,-24.754l4.498,-4.5a6.344,6.344 0 0 1 8.996,0l26.983,27.006a6.347,6.347 0 0 1 1.847,3.98zm-46.707,-4.095l-2.362,2.364a3.178,3.178 0 0 0 0,4.501l2.362,2.364l2.361,-2.364a3.178,3.178 0 0 0 0,-4.501l-2.361,-2.364z"
+                  id="a" />
+              </defs>
+              <g>
+                <title>background</title>
+                <rect fill="none" id="canvas_background" height="82" width="202" y="-1" x="-1" />
+              </g>
+              <g>
+                <title></title>
+                <g stroke="null" id="svg_4">
+                  <title
+                    transform="translate(10.971592903137207,7.390244483947754) scale(0.5474544167518616,0.7345335483551025) translate(-10.971592903137207,-7.390244483947754) "
+                    stroke="null" />
+                  <use stroke="null" x="17" y="2.02049"
+                    transform="matrix(0.5474544167518616,0,0,0.72708498283734,4.965145909511364,2.703366699966363) "
+                    id="svg_3" xlink:href="#a" class="fill-warning" />
+                  <text stroke="null" fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null"
+                    stroke-linecap="null" x="17.3725" y="39.68749" id="svg_1" font-size="24" font-family="Serif"
+                    text-anchor="middle" xml:space="preserve"
+                    transform="matrix(2.573122913791901,0,0,2.4057628719646504,-16.52865771592052,-36.74046819908677) "
+                    font-weight="bold">S</text>
+                  <text stroke="null" fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null"
+                    stroke-linecap="null" x="178.3725" y="35.68749" id="svg_2" font-size="24" font-family="Serif"
+                    text-anchor="middle" xml:space="preserve"
+                    transform="matrix(1.7565606877077597,0,0,2.12454383942287,-169.10264632948585,-17.606876648996526) "
+                    font-weight="bold">ERP</text>
+                </g>
+              </g>
+            </svg> </a>
+        </div>
+        <div class="top-bar-list">
+          <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+            <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="toggle menu"><span
+                class="hamburger-box"><span class="hamburger-inner"></span></span></button>
+          </div>
+          <div class="top-bar-item top-bar-item-full">
+            <form class="top-bar-search">
+              {% csrf_token %}
+              <div class="input-group input-group-search dropdown">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><span class="oi oi-magnifying-glass"></span></span>
+                </div><input type="text" class="form-control" data-toggle="dropdown" aria-label="Search"
+                  placeholder="Search">
+                <div class="dropdown-menu dropdown-menu-rich dropdown-menu-xl ml-n4">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+            <ul class="header-nav nav">
+              <li class="nav-item dropdown header-nav-dropdown">
+                <a class="nav-link" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                    class="oi oi-grid-three-up"></span></a>
+                <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                  <div class="dropdown-arrow"></div>
+                  <div class="dropdown-sheets">
+                    {% if S10000001 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'sales-clients-createlist' %}" class="tile-wrapper"><span class="tile tile-lg bg-indigo"><i
+                            class="oi oi-people"></i></span> <span class="tile-peek">Customer Opening</span></a>
+                    </div>
+                    {% endif %}
+                    {% if S10000003 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'sales-supplier-createlist' %}" class="tile-wrapper"><span class="tile tile-lg bg-teal"><i
+                            class="oi oi-fork"></i></span> <span class="tile-peek">Supplier Opening</span></a>
+                    </div>
+                    {% endif %}
+                    {% if S30000001 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'sales-purchase-master' %}" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i
+                            class="fa fa-tasks"></i></span> <span class="tile-peek">Purchase Entry</span></a>
+                    </div>
+                    {% endif %}
+                    {% if S40000001 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'sales-sales-create' %}" class="tile-wrapper"><span class="tile tile-lg bg-pink"><i
+                            class="fa fa-tasks"></i></span> <span class="tile-peek">Sales Entry</span></a>
+                    </div>
+                    {% endif %}
+                    {% if S40000002 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'sales-quick-sales' %}" class="tile-wrapper"><span class="tile tile-lg bg-yellow"><i
+                            class="oi oi-fire"></i></span> <span class="tile-peek">Quick Sales</span></a>
+                    </div>
+                    {% endif %}
+                    {% if F10000001 %}
+                    <div class="dropdown-sheet-item">
+                      <a href="{% url 'finance-account-transaction' %}" class="tile-wrapper"><span class="tile tile-lg bg-cyan"><i
+                            class="oi oi-document"></i></span> <span class="tile-peek">Account Transaction</span></a>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="dropdown d-flex">
+              <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><span class="user-avatar user-avatar-md"><img
+                    src="{% static 'assets/images/avatars/profile.jpg' %}" alt=""></span> <span
+                  class="account-summary pr-lg-4 d-none d-lg-block"><span class="account-name">{{ user_full_name }}</span> <span class="account-description">
+                    {{ user_designation }} </span></span></button>
+              <div class="dropdown-menu">
+                <div class="dropdown-arrow ml-3"></div>
+                <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{ user_full_name }} </h6><a
+                  class="dropdown-item" href="{% url 'appauth-reset-password' %}"><span
+                    class="dropdown-icon oi oi-person"></span> Reset My Password </a> <a class="dropdown-item"
+                  href="{% url 'appauth-logout' %}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <aside class="app-aside app-aside-expand-md app-aside-light">
+      <div class="aside-content">
+        <header class="aside-header d-block d-md-none">
+          <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside"><span
+              class="user-avatar user-avatar-lg"><img src="{% static 'assets/images/avatars/profile.jpg' %}"
+                alt=""></span> <span class="account-icon"><span class="fa fa-caret-down fa-lg"></span></span> <span
+              class="account-summary"><span class="account-name">{{ user_full_name }}</span> <span
+                class="account-description"> {{ user_designation }}</span></span></button>
+          <div id="dropdown-aside" class="dropdown-aside collapse">
+            <div class="pb-3">
+              <a class="dropdown-item" href="{% url 'appauth-reset-password' %}"><span
+                  class="dropdown-icon oi oi-person"></span> Reset My Password </a> <a class="dropdown-item"
+                href="{% url 'appauth-logout' %}"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+            </div>
+          </div>
+        </header>
+        <div class="aside-menu overflow-hidden">
+          <nav id="stacked-menu" class="stacked-menu">
+            <ul class="menu">
+              {% if D99999999 %}
+              <li class="menu-item has-active">
+                <a href="{% url 'appauth-dashboard' %}" class="menu-link"><span class="menu-icon fas fa-home"></span>
+                  <span class="menu-text">Dashboard</span></a>
+              </li>
+              {% endif %}
+              {% if S10000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Manage Customer</span>
+                </a>
+                <ul class="menu">
+                  {% if S10000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-clients-createlist' %}" class="menu-link">Customer Opening</a>
+                  </li>
+                  {% endif %}
+                  {% if S10000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-clients-list' %}" class="menu-link">Customer List</a>
+                  </li>
+                  {% endif %}
+                  {% if S10000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-supplier-createlist' %}" class="menu-link">Supplier Opening</a>
+                  </li> 
+                  {% endif %}
+                  {% if S10000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-clientid-change' %}" class="menu-link">Change Customer ID</a>
+                  </li>
+                  {% endif %}
+                  <li class="menu-item">
+                    <a href="{% url 'delar-clientcenter-transfer' %}" class="menu-link">Customer Center Transfer</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'sales-client-closing' %}" class="menu-link">Customer Closing</a>
+                  </li>
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if E10000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">eCommerce Settings</span>
+                </a>
+                <ul class="menu">
+                  {% if E10000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'ecom-product-categories-createlist' %}" class="menu-link">Products Categories</a>
+                  </li>
+                  {% endif %}
+                  {% if E10000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'ecom-product-subcategories-createlist' %}" class="menu-link">Products Subcategories</a>
+                  </li>
+                  {% endif %}
+                  {% if E10000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'ecom-product-createlist' %}" class="menu-link">Manage Online Products</a>
+                  </li>
+                  {% endif %}
+                  {% if E10000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'ecom-slider-createlist' %}" class="menu-link">Manage Slider</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S20000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Manage Products</span>
+                </a>
+                <ul class="menu">
+                  {% if S20000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-productgroup-createlist' %}" class="menu-link">Manage Product Group</a>
+                  </li>
+                  {% endif %}
+                  {% if S20000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-productbrand-createlist' %}" class="menu-link">Manage Product Brand</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'sales-productunit-createlist' %}" class="menu-link">Manage Product Unit</a>
+                  </li>
+                  {% endif %}
+                  {% if S20000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-products-createlist' %}" class="menu-link">Create Products</a>
+                  </li>
+                  {% endif %}
+                  {% if S20000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-products-list' %}" class="menu-link">Product List</a>
+                  </li>
+                  {% endif %}
+                  {% if S20000005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-products-balance' %}" class="menu-link">Product Inventory Status</a>
+                  </li>
+                  {% endif %}
+
+                  {% if S20000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-products-barcode' %}" class="menu-link">Product Barcode</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S30000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Purchase</span>
+                </a>
+                <ul class="menu">
+                  {% if S30000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-master' %}" class="menu-link">Purchase With Approval</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-approval' %}" class="menu-link">Purchase Approval</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000008 %}
+                  <li class="menu-item">
+                      <a href="{% url 'sales-quickpurchase-master' %}" class="menu-link">Purchase Entry</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-list' %}" class="menu-link">Purchase List</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-returnproduct' %}" class="menu-link">Purchase Return</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchasereturn-list' %}" class="menu-link">Purchase Return List</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000006 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-damage-entry' %}" class="menu-link">Product Damage Entry</a>
+                  </li>
+                  {% endif %}
+                  {% if S30000007 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-damage-list' %}" class="menu-link">Product Damage List</a>
+                  </li>
+                  {% endif %}
+                  <!-- {% if S30000008 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-order-view' %}" class="menu-link">Purchase order master</a>
+                  </li>
+                  {% endif %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-purchase-order-approval' %}" class="menu-link">Purchase order master approval</a>
+                  </li> -->
+                  
+                </ul>
+              </li>
+              {% endif %}
+              
+
+              {% if S40000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Sales</span>
+                </a>
+                <ul class="menu">
+                  {% if S40000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-sales-create' %}" class="menu-link">Sales Entry</a>
+                  </li>
+                  {% endif %}
+                  {% if S40000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-quick-sales' %}" class="menu-link">Quick Sales</a>
+                  </li>
+                  {% endif %}
+                  {% if S40000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-invoice-list' %}" class="menu-link">Invoice List</a>
+                  </li>
+                  {% endif %}
+                  {% if S40000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-sales-return' %}" class="menu-link">Sales Return</a>
+                  </li>
+                  {% endif %}
+                  {% if S40000005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-invoicereturn-list' %}" class="menu-link">Sales Return List</a>
+                  </li>
+                  {% endif %}
+
+                  <li class="menu-item">
+                    <a href="{% url 'sales-branch-transfer-view' %}" class="menu-link">Branch Stock Transfer</a>
+                  </li>
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S50000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Manage EMI</span>
+                </a>
+                <ul class="menu">
+                  {% if S50000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-emisetup-createlist' %}" class="menu-link">EMI Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if S50000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-emircv-view' %}" class="menu-link">EMI Receive</a>
+                  </li>
+                  {% endif %}
+                  {% if S50000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-emihist-list' %}" class="menu-link">EMI Receive History</a>
+                  </li>
+                  {% endif %}
+
+                  <li class="menu-item">
+                    <a href="{% url 'sales-emihist-list' %}" class="menu-link">EMI Receive History</a>
+                  </li>
+
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S60000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Sales Order</span>
+                </a>
+                <ul class="menu">
+                  {% if S60000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-order-create' %}" class="menu-link">Create Order</a>
+                  </li>
+                  {% endif %}
+                  {% if S60000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-order-list' %}" class="menu-link">Order List</a>
+                  </li>
+                  {% endif %}
+                  {% if S60000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'ecom-order-list' %}" class="menu-link">Online Order List</a>
+                  </li>
+                  {% endif %}
+                  <li class="menu-item">
+                    <a href="{% url 'delar_sales_return_packet_view' %}" class="menu-link">Sales Packet Return</a>
+                  </li>
+                </ul>
+              </li>
+              {% endif %}
+              
+
+              {% if D10000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Sales Representative</span>
+                </a>
+                <ul class="menu">
+                  {% if D10000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'delar-sales-create' %}" class="menu-link">Allocate Products</a>
+                  </li>
+                  {% endif %}
+                  {% if D10000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'delar-invoice-list' %}" class="menu-link">Allocate List</a>
+                  </li>
+                  {% endif %}
+                  
+
+                  <li class="menu-item">
+                    <a href="{% url 'sales-details-report' %}" class="menu-link"> Sales Order Report Details</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'sales-allocate-quantity-report' %}" class="menu-link"> Allocate Quantity Report </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'delar-invoice-return-list' %}" class="menu-link">Packet Return List</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-packet-return' %}" class="menu-link">Report Packet Return</a>
+                  </li>
+
+                  <li class="menu-item">
+                    <a href="{% url 'sales-invoice-return-allocate-list' %}" class="menu-link">SR Return Allocate List</a>
+                  </li>
+
+                  <li class="menu-item">
+                    <a href="{% url 'delar-sr-target' %}" class="menu-link">SR Sales Target</a>
+                  </li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              {% endif %}
+
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">PayRoll</span>
+                </a>
+                <ul class="menu">
+                    <li class="menu-item">
+                        <a href="{% url 'hrm-department-info' %}" class="menu-link">Add Deparment</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'hrm-designation-create' %}" class="menu-link">Create Designation</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'hrm-employee-extra-allownce-create' %}" class="menu-link">Extra allownce</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'hrm-advsalary-create' %}" class="menu-link">Advance Salary</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="{% url 'hrm-salary_sheet' %}" class="menu-link"> Hrm Salary Processing </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{% url 'appauth-employee-createlist' %}" class="menu-link">Employee Register</a>
+                    </li>
+
+                  
+                    <!-- <li class="menu-item">
+                      <a href="{% url 'hrm-report-salary-sheet' %}" class="menu-link">Salary Sheet</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{% url 'hrm-report-employee-sheet' %}" class="menu-link">Employee Sheet</a>
+                    </li> -->
+                 
+                    <li class="menu-item">
+                      <a href="{% url 'hrm-report-salary-sheet' %}" class="menu-link">Salary Sheet Report</a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="{% url 'hrm-report-employee-sheet' %}" class="menu-link">Employee Sheet Report </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+
+
+              
+              {% if F10000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Accounts Transaction</span>
+                </a>
+                <ul class="menu">
+                  {% if F10000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-account-transaction' %}" class="menu-link">Account Transaction</a>
+                  </li>
+                  {% endif %}
+                  {% if F10000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-ledger-transaction' %}" class="menu-link">Ledger Transaction</a>
+                  </li>
+                  {% endif %}
+                  {% if F10000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-depositreceive-createlist' %}" class="menu-link">Deposit Receive</a>
+                  </li>
+                  {% endif %}
+                  {% if F10000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-depositpayment-createlist' %}" class="menu-link">Deposit Payment</a>
+                  </li> 
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if F20000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Teller Management</span>
+                </a>
+                
+                <ul class="menu">
+                  {% if F20000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-telbaltrf-view' %}" class="menu-link">Balance Transfer Request</a>
+                  </li>
+                  {% endif %}
+                  {% if F20000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-telbaltrf-authlist' %}" class="menu-link">Cash Receive/Payment</a>
+                  </li>
+                  {% endif %}
+                  {% if F20000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-teller-balance' %}" class="menu-link">Teller Balance Report</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if F30000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Accounts Query</span>
+                </a>
+                <ul class="menu">
+                  {% if F30000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-accounts-balance' %}" class="menu-link">Account Balance</a>
+                  </li>
+                  {% endif %}
+                  {% if F30000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-actran-details' %}" class="menu-link">Account Transaction Details</a>
+                  </li>
+                  {% endif %}
+                  {% if F30000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-transaction-list' %}" class="menu-link">Transaction List</a>
+                  </li>
+                  {% endif %}
+                  {% if F30000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-transaction-query' %}" class="menu-link">Transaction Details Query</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if F40000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
+                    class="menu-text">Accounts Settings</span></a>
+                <ul class="menu">
+                  {% if F40000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-ledger-create' %}" class="menu-link">Chart Of Account (COA)</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-charges-createlist' %}" class="menu-link">Charge Parameter Settings</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-trantype-createlist' %}" class="menu-link">Transaction Type Settings</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-trantypeledger-createlist' %}" class="menu-link">Transaction Ledger
+                      Mapping</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-cashnbankledger-createlist' %}" class="menu-link">Cash & Bank Ledger</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000006 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-accounttype-createlist' %}" class="menu-link">Manage Account Type</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000007 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-clienttype-createlist' %}" class="menu-link">Manage Clients Type</a>
+                  </li>
+                  {% endif %}
+                  {% if F40000008 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-clientacmap-createlist' %}" class="menu-link">Client Account Mapping</a>
+                  </li>
+                  {% endif %} 
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if A10000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
+                    class="menu-text">Authentication</span></a>
+                <ul class="menu">
+                  {% if A11000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'appauth-user-create' %}" class="menu-link">Create User</a>
+                  </li>
+                  {% endif %}
+                  {% if A11000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'appauth-application-users' %}" class="menu-link">User List</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if A20000000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Settings</span>
+                </a>
+                <ul class="menu">
+                  {% if A20000001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'appauth-branch-createlist' %}" class="menu-link">Manage Branch</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'appauth-employee-createlist' %}" class="menu-link">Employee Register</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'delar-center-createlist' %}" class="menu-link">Sales Region Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'appauth-country-createlist' %}" class="menu-link">Country Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000005 %}
+                  <li class="menu-item">
+                    <a href="{% url '' %}" class="menu-link">Division Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000006 %}
+                  <li class="menu-item">
+                    <a href="{% url '' %}" class="menu-link">District Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000007 %}
+                  <li class="menu-item">
+                    <a href="{% url '' %}" class="menu-link">Upazila Setup</a>
+                  </li>
+                  {% endif %}
+                  {% if A20000008 %}
+                  <li class="menu-item">
+                    <a href="{% url '' %}" class="menu-link">Union Setup</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S10001000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Purchase Reports</span>
+                </a>
+                <ul class="menu">
+                  {% if S10001001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-stockinventory' %}" class="menu-link">Inventory Status Report</a>
+                  </li>
+                  {% endif %}
+                  {% if S10001002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywisepurchase' %}" class="menu-link">Daily Purchase Details</a>
+                  </li>
+                  {% endif %}
+                  {% if S10001003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywise-purchasenreturn' %}" class="menu-link">Purchase & Return
+                      Details</a>
+                  </li>
+                  {% endif %}
+                  {% if S10001004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywise-purchasenreturnstmt' %}" class="menu-link">Supplier
+                      Statement</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              {% endif %}
+
+              {% if S10002000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span
+                    class="menu-text">Sales Reports</span>
+                </a>
+                <ul class="menu">
+                  {% if S10002001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-invoice' %}" class="menu-link">Invoice Print</a>
+                  </li>
+                  {% endif %}
+                  {% if S10002002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywisesales' %}" class="menu-link">Daily Sales Details</a>
+                  </li>
+                  {% endif %}
+                  {% if S10002003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-salesdetails' %}" class="menu-link">Sales Details Report</a>
+                  </li>
+                  {% endif %}
+                  {% if S10002004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywise-salesnreturn' %}" class="menu-link">Sales & Return Details</a>
+                  </li>
+                  {% endif %}
+                  {% if S10002005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-profitnloss' %}" class="menu-link">Profit & Loss Report</a>
+                  </li>
+                  {% endif %}
+                  {% if S10002006 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-daywise-salesnreturnstmt' %}" class="menu-link">Customer Statement</a>
+                  </li>
+                  {% endif %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-centersalesdetails' %}" class="menu-link">Sales Details Report</a>
+                  </li>
+                  {% if S10002007 %}
+                  <li class="menu-item">
+                    <a href="{% url 'sales-report-emidetails' %}" class="menu-link">EMI Details Report</a>
+                  </li>
+                  {% endif %} 
+                </ul>
+              </li>
+              {% endif %}
+
+
+              <!-- <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-browser"></span> <span class="menu-text">HRM Report</span>
+                </a>
+                <ul class="menu">
+                  <li class="menu-item">
+                    <a href="{% url 'hrm-report-salary-sheet' %}" class="menu-link">Salary Sheet</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="{% url 'hrm-report-employee-sheet' %}" class="menu-link">Employee Sheet</a>
+                  </li>
+                  
+                  
+                </ul>
+              </li> -->
+
+              {% if F10001000 %}
+              <li class="menu-item has-child">
+                <a href="#" class="menu-link"><span class="menu-icon oi oi-wrench"></span> <span
+                    class="menu-text">Accounts Report</span></a>
+                <ul class="menu">
+                  {% if F10001001 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-account-balance' %}" class="menu-link">Account Balance</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001002 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-cashtrandetails' %}" class="menu-link">Cash Transaction Details</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001003 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-ledgerstatements' %}" class="menu-link">Ledger Statement</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001004 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-receiptpayment' %}" class="menu-link">Receipt & Payment</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001005 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-assetliabilities' %}" class="menu-link">Balance Sheet (Asset &
+                      Liabilities)</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001006 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-incomeexpenses' %}" class="menu-link">Income & Expenses</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001007 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-trialbalance' %}" class="menu-link">Trial Balance</a>
+                  </li>
+                  {% endif %}
+                  {% if F10001008 %}
+                  <li class="menu-item">
+                    <a href="{% url 'finance-report-cashnbank' %}" class="menu-link">Cash & Bank (Receipt & Payment)</a>
+                  </li>
+                  {% endif %} 
+                </ul>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Model for Loading -->
+        <div class="modal ajaxProgress" id="page_loading" data-backdrop="static">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h5>Please Wait ...</h5>
+                <img src="{% static 'assets/images/ajax/ajax-loader.gif' %}" alt="loading" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="aside-footer border-top p-3">
+          <button class="btn btn-light btn-block text-primary" data-toggle="skin">Night mode <i
+              class="fas fa-moon ml-1"></i></button>
+        </footer>
+      </div>
+    </aside>
+
+    <main class="app-main">
+      <div class="wrapper">
+
+        {% block body %}
+
+        {% endblock body %}
+
+      </div>
+
+      <input type='hidden' id='id_global_branch_code' class='global_branch_code' value={{ global_branch_code }}
+        readonly>
+      <input type='hidden' id='id_is_head_office_user' class='is_head_office_user' value={{ is_head_office_user }}
+        readonly>
+      <input type='hidden' id='id_is_back_date_posting' class='is_back_date_posting' value={{ is_back_date_posting }}
+        readonly>
+
+      <footer class="app-footer">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="text-muted" href="http://pearttechnology.com/contact-us" target="_blank">Support</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="http://pearttechnology.com/contact-us" target="_blank">Help Center</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="http://pearttechnology.com/contact-us" target="_blank">Privacy</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="http://pearttechnology.com/contact-us" target="_blank">Terms of Service</a>
+          </li>
+        </ul>
+        <div class="copyright"> Copyright Â© <a href="http://pearttechnology.com/" target="_blank"> Peart Technology
+            Limited. </a>All right reserved. </div>
+      </footer>
+    </main>
+  </div>
+  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/popper.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/pace/pace.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/stacked-menu/stacked-menu.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery/select2.min.js' %}" defer></script>
+  <script src="{% static 'assets/vendor/flatpickr/flatpickr.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/easy-pie-chart/jquery.easypiechart.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/javascript/theme.min.js' %}"></script>
+  <script src="{% static 'assets/copper/cropper.min.js' %}"></script>
+  {% block js %}
+
+  {% endblock js %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-116692175-1');
+  </script>
+
+  <script>
+    $(function () {
+
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      var csrftoken = getCookie('csrftoken');
+
+      function csrfSafeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      function sameOrigin(url) {
+        var host = document.location.host;
+        var protocol = document.location.protocol;
+        var sr_origin = '//' + host;
+        var origin = protocol + sr_origin;
+        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+          (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+          !(/^(\/\/|http:|https:).*/.test(url));
+      }
+
+      $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>

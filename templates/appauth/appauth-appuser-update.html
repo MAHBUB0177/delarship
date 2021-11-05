@@ -1,0 +1,55 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal-header"> </div>
+{% csrf_token %}
+<div class="container">
+    <h4 align="center">Update User Profile </h4>
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <form method="post" id="edit_form" data-url="{% url 'appauth-appuser-update' id %}" class="update-form">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.employee_id|as_crispy_field }}
+                        </div>
+                        {% if is_head_office_user %}
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.branch_code | as_crispy_field }}
+                        </div>
+                        {% else %}
+                        <input type='hidden' id='id_branch_code' name='branch_code' value={{ global_branch_code }}
+                            readonly>
+                        {% endif %}
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.app_user_id|as_crispy_field }}
+                        </div>
+                        {% if is_head_office_user %}
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.head_office_admin | as_crispy_field }}
+                        </div>
+                        {% endif %}
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.daily_debit_limit|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.daily_credit_limit|as_crispy_field }}
+                        </div>
+                        <div class="form-group col-md-4 mb-0">
+                            {{ form.is_active|as_crispy_field }}
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/javascript/pages/common-submit-editdata.js' %}"></script>

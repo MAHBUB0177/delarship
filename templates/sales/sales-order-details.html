@@ -1,0 +1,68 @@
+{% load humanize %}
+<div class="card">
+	<div class="card-body">
+		<div class="mt-1 mb-1">
+			<label> <h5> Payment Receive </h5></label>
+			<input id='id_payment_amount'  type="number" class="form-control" value=0.00>
+		</div>
+		<table id="data_table_sheet" class="table table-hover table-bordered table-sm table-responsive">
+			<thead>
+				<tr>
+					<th>Product ID</th>
+					<th>Product Name</th>
+					<th>Ordered Price</th>
+					<th>Delivered Price</th>
+					<th>Order Quantity</th>
+					<th>Delivered Quantity</th>
+					<th>Deliverable Quantity</th>
+					<th>Unit Price</th>
+					<th>Total Price</th>
+					<th>Discount Rate</th>
+					<th>Total Discount</th>
+					<th>Price After Discount</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for rows in data %}
+				<tr>
+					<td class="product_id" data-type="name">{{ rows.product_id }}</td>
+					<td class="product_name" data-type="name">{{ rows.product_name }}</td>
+					<td class="ordered_total_price text-right" data-type="name">{{ rows.ordered_total_price|default_if_none:"0.00" }}</td>
+					<td class="delivered_total_price text-right" data-type="name">{{ rows.delivered_total_price|default_if_none:"0.00" }}</td>
+					<td class="ordered_quantity" data-type="name">{{ rows.ordered_quantity|default_if_none:"0" }}</td>
+					<td class="delivered_quantity" data-type="name">{{ rows.delivered_quantity|default_if_none:"0" }}
+					</td>
+					<td><input type='number' class='quantity' value={{ rows.quantity }} onchange='calculfac()'></td>
+					<td><input type='number' class='product_price' value={{ rows.product_price }} onchange='calculfac()'>
+					</td>
+					<td class="total_price" data-type="inst">{{ rows.total_price }}</td>
+					<td><input type='number' class='discount_rate' value={{ rows.discount_rate }} onchange='calculfac()'>
+					</td>
+					<td><input type='number' class='discount_amount' value={{ rows.discount_amount }} onchange='calculfac()'></td>
+					<td class="sales_amount" data-type="inst">{{ rows.sales_amount }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="2" class="text-right"> Total: </th>
+					<th class="text-right" id="total_ordered_total_price" class="total_ordered_total_price"></th>
+					<th class="text-right" id="total_delivered_total_price" class="total_delivered_total_price"></th>
+					<th id="total_ordered_quantity" class="total_ordered_quantity"></th>
+					<th id="total_delivered_quantity" class="total_delivered_quantity"></th>
+					<th id="total_quantity" class="total_quantity"></th>
+					<th></th>
+					<th id="total_total_price" class="total_total_price"></th>
+					<th></th>
+					<th id="total_discount_amount" class="total_discount_amount"></th>
+					<th id="total_price_after_discount" class="total_price_after_discount"></th>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<button onclick='saveData();' type="button" class="btn btn-primary">Deliver</button>
+</div>

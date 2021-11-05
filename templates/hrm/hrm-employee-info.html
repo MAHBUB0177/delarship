@@ -1,0 +1,361 @@
+{% extends 'appauth/appauth-home.html' %} {% load static %} {% load crispy_forms_tags %} {% block title %} Manage Department | {{ application_title }} {% endblock %} {% block body %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card card-fluid">
+            <div class="card-body">
+                <div>
+                    <form method="post" id="tran_table_data" data-url="{% url 'hrm-employee-info-insert' %}" class="update-form">
+                        <div class="form-group">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-10 mb-0">
+                                            <h3 class="card-title"> {{title}} Details </h3>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {% csrf_token %}
+                                        <div class="form-row">
+                                            {% if is_head_office_user %}
+                                            <div class="form-group col-md-3 mb-0">
+                                              {{ form.branch_code | as_crispy_field }}
+                                            </div>
+                                            {% else %}
+                                            <input type='hidden' id='id_branch_code' name='branch_code' value={{ global_branch_code }} readonly>
+                                            {% endif %}
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_name|as_crispy_field }}
+                                            </div>
+
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_father_name|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_mother_name|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_blood_group|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_sex|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_religion|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_marital_status|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_national_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.country_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.division_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.district_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.upozila_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_present_address|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_permanent_address|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_phone_own|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_phone_office|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_phone_home|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.passport_no|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.driving_licence|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_tin|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.email_personal|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_joining_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_date_of_birth|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.employee_status|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.eme_contact_name|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.eme_contact_relation|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.eme_contact_phone|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.eme_contact_address|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.office_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.emptype_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.salscale|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.salary_gross|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.designation_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.department_id|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.email_official|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.reporting_to|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.current_shift|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.office_location|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.card_number|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.salary_bank|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.salary_bank_ac|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.contract_start_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.contract_exp_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.last_inc_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.next_inc_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.service_end_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.last_transfer_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.next_transfer_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.job_confirm_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.pf_confirm_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.gf_confirm_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.wf_confirm_date|as_crispy_field }}
+                                            </div>
+                                            <div class="form-group col-md-4 mb-0">
+                                                {{ form.last_promotion_date|as_crispy_field }}
+                                            </div>
+
+
+
+                                        </div>
+                                        <button type="button" id="btnAddRecord" class="btn btn-primary">Create New
+											</button>
+                                        <button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+											</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="app">
+
+            <div class="card card-fluid">
+                <div class="card-body">
+                    <table id="dt-table-list" class="table dt-responsive nowrap w-100">
+                        <thead>
+                            <tr>
+                                <th> id </th>
+                                <th> employee name </th>
+                                <th>Father name </th>
+                                <th>Mother name </th>
+                                <th>Blood Group</th>
+                                <th>Gender</th>
+                                <th>Religion</th>
+                                <th>Marital Status</th>
+                                <th>Nationality</th>
+                                <th>Country</th>
+                                <th>Division</th>
+                                <th>District</th>
+                                <th>Upozila</th>
+
+                                <th>Pressent Address</th>
+                                <th>Parmanent Address</th>
+                                <th>Phone own</th>
+                                <th>Phone Office</th>
+
+                                <th>Phone Home</th>
+                                <th>Passport No</th>
+                                <th>Driving License</th>
+                                <th>Tin No</th>
+                                <th>Email personal</th>
+                                <th>Joining </th>
+                                <th>DateOfBirth</th>
+                                <th>Status</th>
+                                <!-- <th>OP contact</th> -->
+
+                                <th>OP contact Name</th>
+
+                                <th>Op contact Relationship</th>
+                                <th>OP contact Phone</th>
+
+                                <th>Op contact Address</th>
+                                <th>Running Office</th>
+
+                                <th>employee Type</th>
+                                <th>Salary scale</th>
+                                <th>Gross Salary</th>
+
+                                <th>Designation</th>
+                                <th>Email Office</th>
+                                <th>Reporting Officer</th>
+
+                                <th> CurrentShift </th>
+                                <th>Office location</th>
+                                <th>Card Number</th>
+
+                                <th>Salary Bank</th>
+                                <th>Account No</th>
+                                <th>contract Start date</th>
+                                <th>Contract End date</th>
+
+                                <th>Last incriment Date</th>
+                                <th>Next incriment Date</th>
+                                <th>Service End date</th>
+
+                                <th>Last transfer Date</th>
+                                <th>Next transfer Date</th>
+                                <th>Job confirm date</th>
+
+                                <th>pf Date</th>
+                                <th>Gf Date</th>
+                                <th>None</th>
+                                
+                                <th> Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+
+                                <th> id </th>
+
+                                <th> employee name </th>
+                                <th>Father name </th>
+                                <th>Mother name </th>
+                                <th>Blood Group</th>
+                                <th>Gender</th>
+                                <th>Religion</th>
+                                <th>Marital Status</th>
+                                <th>Nationality</th>
+                                <th>Country</th>
+                                <th>Division</th>
+                                <th>District</th>
+                                <th>Upozila</th>
+                                <th>Pressent Address</th>
+                                <th>Parmanent Address</th>
+                                <th>Phone own</th>
+                                <th>Phone Office</th>
+                                <th>Phone Home</th>
+                                <th>Passport No</th>
+                                <th>Driving License</th>
+                                <th>Tin No</th>
+                                <th>Email personal</th>
+                                <th>Joining </th>
+                                <th>DateOfBirth</th>
+                                <th>Status</th>
+                                <th>OP contact</th>
+                                <th>OP contact Name</th>
+                                <th>Op contact Relationship</th>
+                                <th>OP contact Phone</th>
+                                <th>Op contact Address</th>
+                                <th>Running Office</th>
+                                <th>employee Type</th>
+                                <th>Salary scale</th>
+                                <th>Designation</th>
+                                <th>Email Office</th>
+                                <th>Reporting Officer</th>
+                                <th> CurrentShift </th>
+                                <th>Office location</th>
+                                <th>Card Number</th>
+                                <th>Salary Bank</th>
+                                <th>Account No</th>
+                                <th>contract Start date</th>
+                                <th>Contract End date</th>
+                                <th>Last incriment Date</th>
+                                <th>Next incriment Date</th>
+                                <th>Service End date</th>
+                                <th>Last transfer Date</th>
+                                <th>Next transfer Date</th>
+                                <th>Job confirm date</th>
+                                <th>pf Date</th>
+                                <th>Gf Date</th>
+                                <th>last promotion date</th>
+                                <th> Action</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="edit_model" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    {% endblock body %} {% block js %}
+    <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+    <script src="{% static 'assets/javascript/pages/hrm/hrm-employee-createlist.js' %}"></script>
+    {% endblock %}
+</div>

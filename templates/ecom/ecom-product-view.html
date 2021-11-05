@@ -1,0 +1,227 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Online Product Details | {{ application_title }}
+{% endblock %}
+{% block upperjs %}
+<style>
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .preview {
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin: 10px;
+    border: 1px solid red;
+  }
+
+  .modal-lg {
+    max-width: 1000px !important;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<body>
+  <div class="app">
+    <div class="page">
+
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h4 class="card-title"> Online Products </h4>
+                <form method="post" action="/ecom-product-edit" data-url="/ecom-product-edit" id="ecom-product-update">
+                  <div class="form-row">
+                    {% csrf_token %}
+                    <div class="form-group col-md-12 mb-2">
+                      <label>Product Name</label>
+                      <input type="hidden" name="product_id" id="id_product_id" value="{{product.product_id}}">
+                      <input type="text" name="product_name" value="{{product.product_name}}" class="form-control"
+                        readonly>
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_brand_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.category_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.sub_category_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.product_model | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.product_group | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.product_price | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.discount_amount | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.product_old_price | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-12 mb-0">
+                      {{ form.product_description }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_feature | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_keyword | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_specification | as_crispy_field }}
+                    </div>
+                  </div>
+                  <div class>
+                    <button type="submit" id="btnUpdate" class="btn btn-info">Update</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+          <header class="card-title-bar">
+            <h3 class="card-title text-center"> Product Images</h3>
+          </header>
+          <div class="card card-fluid">
+            <div class="card-body">
+              <div>
+                <div class="row">
+                  <div class="col-2">
+                    <strong>Add new image</strong>
+                  </div>
+                  <div class="col crop-image">
+                    <input type="file" name="image" id="image_upload" class="image">
+                  </div>
+                </div>
+                <table class="table" id="product_images">
+                  <thead>
+                    <tr>
+                      <th>SL</th>
+                      <th>Image</th>
+                      <th>Image Serial Number</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for image in images %}
+                    <tr>
+                      <td>{{ forloop.counter }}</td>
+                      <td>
+                        <img src="/media/{{image.image}}" style="height: 120px;">
+                      </td>
+                      <td>{{image.image_serial}}</td>
+                      <td>
+                        <button class="btn btn-danger" id="{{image.id}}"
+                          onclick='image_delete_button("{{image.id}}")'>Delete</button>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+
+                <div class="modal fade crop-image" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+                  aria-hidden="true">
+
+                  <div class="modal-dialog modal-lg" role="document">
+
+                    <div class="modal-content">
+
+                      <div class="modal-header">
+
+                        <h5 class="modal-title" id="modalLabel">Product image</h5>
+
+                        <button type="button" class="btn close" onclick="modal_cancle()">
+
+                          <span aria-hidden="true">×</span>
+
+                        </button>
+
+                      </div>
+
+                      <div class="modal-body">
+
+                        <div class="img-container">
+
+                          <div class="row">
+
+                            <div class="col-md-8">
+                              <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="preview"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" onclick="modal_cancle()">Cancel</button>
+                        <input type="hidden" id="product-id" value="">
+                        <button type="button" class="btn btn-primary" id="crop">Crop</button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="image-delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <strong>If you delete product image click "Yes".</strong>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button type="button" class="btn btn-warning" id="image-confrim" data-id="">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}
+
+  {% block js %}
+
+  <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+  <!-- <script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script> -->
+  <script src="{% static 'assets/tinymce/tinymce.min.js' %}"></script>
+
+  <script src="{% static 'assets/javascript/pages/ecom/ecom-products-update.js' %}"></script>
+  {% endblock %}
+</body>

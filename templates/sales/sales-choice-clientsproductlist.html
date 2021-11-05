@@ -1,0 +1,4 @@
+<option value="">-- Select Invoice --</option>
+{% for data in list_data %}
+<option value="{{ data.invoice_number }}">{{ data.invoice_number }}-{{ data.product_price }}-{{ data.quantity }}-{{ data.app_data_time }} </option>
+{% endfor %}

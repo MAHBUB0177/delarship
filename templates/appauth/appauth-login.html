@@ -1,0 +1,138 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title> Sign In | Sales ERP (Bechakena360)</title>
+    <meta property="og:title" content="Sign In">
+    <meta name="author" content="Rajib Pradhan">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="Sales ERP (Bechakena360)">
+    <meta property="og:description" content="Sales ERP (Bechakena360)">
+    <link rel="canonical" href="index-2.html">
+    <meta property="og:url" content="index-2.html">
+    <meta property="og:site_name" content="Sales ERP (Bechakena360)">
+    <script type="application/ld+json">
+      {
+        "name": "Sales ERP (Bechakena360)",
+        "description": "Sales ERP (Bechakena360)",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Rajib Pradhan"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Sign In",
+        "@context": "http://schema.org"
+      }
+    </script>
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/web-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/web-icon.png' %}">
+    <meta name="theme-color" content="#3063A0">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/vendor/fontawesome/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min.css' %}" data-skin="default">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme-dark.min.css' %}" data-skin="dark">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/custom.css' %}">
+    <script>
+        var skin = localStorage.getItem('skin') || 'default';
+        var unusedLink = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+        unusedLink.setAttribute('rel', '');
+        unusedLink.setAttribute('disabled', true);
+    </script>
+</head>
+
+<body>
+    <main class="auth">
+        <header id="auth-header" class="auth-header"
+            style="background-image: url({% static 'assets/images/illustration/img-1.png);' %}">
+            <h1>
+                <svg width="350.74499756097794" height="99.5500060915947" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <path id="a"
+                            d="m156.538,45.644l0,1.04a6.347,6.347 0 0 1 -1.847,3.98l-26.983,27.006a6.338,6.338 0 0 1 -3.862,1.839l-1.272,0a6.34,6.34 0 0 1 -3.862,-1.839l-26.984,-27.006a6.353,6.353 0 0 1 0,-9l9.11,-9.117l-2.136,-2.138a3.171,3.171 0 0 0 -4.498,0l-13.493,13.504a3.177,3.177 0 0 0 -0.043,4.453l-0.002,0.003l0.048,0.047l24.733,24.754l-4.497,4.5a6.339,6.339 0 0 1 -3.863,1.84l-1.27,0a6.337,6.337 0 0 1 -3.863,-1.84l-26.983,-27.005a6.353,6.353 0 0 1 0,-9l26.983,-27.008a6.336,6.336 0 0 1 4.498,-1.869c1.626,0 3.252,0.622 4.498,1.87l26.986,27.006a6.353,6.353 0 0 1 0,9l-9.11,9.117l2.136,2.138a3.171,3.171 0 0 0 4.498,0l13.49,-13.504a3.177,3.177 0 0 0 0.046,-4.453l0.002,-0.002l-0.047,-0.048l-24.737,-24.754l4.498,-4.5a6.344,6.344 0 0 1 8.996,0l26.983,27.006a6.347,6.347 0 0 1 1.847,3.98zm-46.707,-4.095l-2.362,2.364a3.178,3.178 0 0 0 0,4.501l2.362,2.364l2.361,-2.364a3.178,3.178 0 0 0 0,-4.501l-2.361,-2.364z" />
+                    </defs>
+                    <g>
+                        <title></title>
+                        <use class="fill-warning" xlink:href="#a" id="svg_3" stroke="null"
+                            transform="matrix(1,0,0,0.9898594617843628,0,1.0094906103131507) " y="2.02049" x="17" />
+                        <text font-weight="bold" stroke="null"
+                            transform="matrix(4.700159200575399,0,0,3.275225314557872,-39.261357599338055,-52.689669880562654) "
+                            xml:space="preserve" text-anchor="middle" font-family="Serif" font-size="24" id="svg_1"
+                            y="39.68749" x="17.3725" stroke-linecap="null" stroke-linejoin="null"
+                            stroke-dasharray="null" stroke-width="0" fill="#ffffff">S</text>
+                        <text font-weight="bold" stroke="null"
+                            transform="matrix(3.208597161622565,0,0,2.892371416091919,-317.95851291468335,-26.641041342169046) "
+                            xml:space="preserve" text-anchor="middle" font-family="Serif" font-size="24" id="svg_2"
+                            y="35.68749" x="178.3725" stroke-linecap="null" stroke-linejoin="null"
+                            stroke-dasharray="null" stroke-width="0" fill="#ffffff">ERP</text>
+                    </g>
+                </svg> <span class="sr-only">Sign In</span>
+            </h1>
+        </header>
+        <form action="{% url 'appauth-login' %}" method="post" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {% if message %}
+                <div class="font-weight-bold" align="center">
+                    {{ message }}
+                </div>
+                {% endif %}
+                <div class="form-label-group">
+                    <input type="text" name="username" id="inputUser" class="form-control" placeholder="Username"
+                        autofocus=""> <label for="username">Username</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-label-group">
+                    <input type="password" name="password" id="inputPassword" class="form-control"
+                        placeholder="Password"> <label for="password">Password</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+            </div>
+            <div class="form-group text-center">
+                <div class="custom-control custom-control-inline custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="remember-me"> <label
+                        class="custom-control-label" for="remember-me">Keep me sign in</label>
+                </div>
+
+            </div>
+        </form>
+        <footer class="auth-footer">
+        <div class="copyright"> Copyright © <a href="http://pearttechnology.com/" target="_blank"> Peart Technology
+            Limited. </a>All right reserved. </div>
+        </footer>
+    </main>
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/particles.js/particles.min.js' %}"></script>
+    <script>
+        $(document).on('theme:init', () => {
+            particlesJS.load('auth-header', '{% static assets/javascript/pages/particles.json');
+        })
+    </script>
+    <script src="{% static 'assets/javascript/theme.js' %}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116692175-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-116692175-1');
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Deposit Account Closing | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-fluid">
+			<div class="card-body">
+				<div>
+					<form method="post" id="tran_table_data" data-url="{% url 'finance-depositclosing-insert' %}"
+						class="update-form">
+						<div class="form-group">
+							<div class="card">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-item col-md-10 mb-0">
+											<h3 class="card-title">Deposit Account Closing</h3>
+										</div>
+									</div>
+									<div>
+										{% csrf_token %}
+										<div class="form-row">
+
+											{% if is_head_office_user %}
+											<div class="form-group col-md-3 mb-0">
+												{{ form.branch_code | as_crispy_field }}
+											</div>
+											{% else %}
+											<input type='hidden' id='id_branch_code' name='branch_code' value={{
+												global_branch_code }} readonly>
+											{% endif %}
+											<div class="form-item col-md-3 mb-0">
+												{{ form.account_number|as_crispy_field }}
+											</div>
+											<div class="form-item col-md-3 mb-0">
+												{{ form.account_balance|as_crispy_field }}
+											</div>
+											<div class="form-item col-md-3 mb-0">
+												{{ form.closing_date|as_crispy_field }}
+											</div>
+											<div class="form-item col-md-3 mb-0">
+												{{ form.closing_balance|as_crispy_field }}
+											</div>
+											<div class="form-item col-md-3 mb-0">
+												{{ form.closing_doc_num|as_crispy_field }}
+											</div>
+											<div class="form-item col-md-3 mb-0">
+												{{ form.narration|as_crispy_field }}
+											</div>
+
+										</div>
+										<button type="button" id="btnAddItem" class="btn btn-primary">Deposit
+											Closing</button>
+										<button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+											Closing</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="app">
+
+		<div class="card card-fluid">
+			<div class="card-body">
+				<table id="dt-table-list" class="table dt-responsive nowrap w-100">
+					<thead>
+						<tr>
+							<th> Branch Code </th>
+							<th> Customer ID </th>
+							<th> Closing Date </th>
+							<th> Closing Balance </th>
+							<th> Document Number </th>
+							<th> Cancel By </th>
+							<th> Cancel On </th>
+							<th> Narration</th>
+							<th> Action </th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th> Branch Code </th>
+							<th> Customer ID </th>
+							<th> Closing Date </th>
+							<th> Closing Balance </th>
+							<th> Document Number </th>
+							<th> Cancel By </th>
+							<th> Cancel On </th>
+							<th> Narration</th>
+							<th> Action </th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	{% if S160101 %}
+	<div class="modal fade" id="edit_model" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+	{% endblock body %}
+
+	{% block js %}
+	<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+	<script src="{% static 'assets/javascript/pages/finance/finance-depositclosing-createlist.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/finance/finance-accounts-search.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+
+	{% endblock %}
+	</body>

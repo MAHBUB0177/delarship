@@ -1,0 +1,123 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Product Packet Return List | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<body>
+    <div class="app">
+        <div class="page">
+
+            <div class="card card-fluid">
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="card card-fluid">
+                            <div class="card-body">
+                                <h4 class="card-title">  Product Packet Return Details</h4>
+                                <form>
+                                    <div class="form-row">
+                                        {% if is_head_office_user %}
+                                        <div class="form-group col-md-3 mb-0">
+                                            {{ form.branch_code | as_crispy_field }}
+                                        </div>
+                                        {% else %}
+                                        <input type='hidden' id='id_branch_code' name='branch_code' value={{
+                                            global_branch_code }} readonly>
+                                        {% endif %}
+                                        <div class="form-group col-md-3 mb-0">
+                                            {{ form.return_invoice | as_crispy_field }}
+                                        </div>
+                                        <div class="form-group col-md-3 mb-0">
+                                            {{ form.product_id | as_crispy_field }}
+                                        </div>
+                                        <div class="form-group col-md-3 mb-0">
+                                            {{ form.invoice_from_date | as_crispy_field }}
+                                        </div>
+                                        <div class="form-group col-md-3 mb-0">
+                                            {{ form.invoice_upto_date | as_crispy_field }}
+                                        </div>
+                                    </div>
+                                    <button type="button" id="btnSearchStockMst" class="btn btn-primary"> Search Invoice</button>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <header class="card-title-bar">
+                        <h3 class="card-title text-center"> Allocation Return Details</h3>
+                    </header>
+
+                    <div class="card card-fluid">
+                        <div class="card-body">
+                            <table id="dt-invoice-return-list" class="table dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th> Branch Code </th>
+                                        <th> Allocation Number </th>
+                                        <th> Allocation Date </th>
+                                        <th> Product id</th>
+                                        <th> Quantity </th>
+                                        <th>value</th>
+                                        <th> Status </th>
+                                        <th> Action</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th> Branch Code </th>
+                                        <th> Allocation Number </th>
+                                        <th> Allocation Date </th>
+                                        <th> Product id</th>
+                                        <th> Quantity </th>
+                                        <th>value</th>
+                                        <th> Status </th>
+                                        <th> Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="view_details" role="dialog">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <h5 class="modal-title text-center">Allocation Return Details</h5>
+                            <div class="modal-header text-center">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="data_table_details"
+                                    class="table table-striped table-hover table-bordered table-sm">
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endblock body %}
+
+    {% block js %}
+    <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+    <script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+    <script src="{% static 'assets/javascript/pages/delar/delar-invoice-return-list.js' %}"></script>
+    {% endblock %}
+</body>

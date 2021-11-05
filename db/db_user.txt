@@ -1,0 +1,36 @@
+CREATE ROLE "education"
+   PASSWORD 'education'
+   SUPERUSER
+   NOINHERIT
+   CREATEROLE
+   REPLICATION
+   LOGIN
+   CREATEDB;
+   
+GRANT postgres TO "education" WITH ADMIN OPTION
+
+CREATE SCHEMA education AUTHORIZATION education
+
+CREATE DATABASE "education"
+   OWNER = education
+   ENCODING = 'UTF8'
+   CONNECTION LIMIT = - 1
+
+
+pg_dump -U postgres islfinance > s.sql///to export
+psql -U samadhanfinance samadhanfinance < samadhanfinance.sql //to import
+
+SELECT p.product_name,
+       q.quantity,
+       q.unit,
+       q.product_id,
+       q.quotation_date,
+       q.quotation_id,
+       q.unit_price,
+       q.total_price,
+        s.vat_condition,
+        s.quotation_validity,
+        s.warranty
+       
+  FROM sales_products p, sales_quotation_details q,sales_quotation_master s
+ WHERE p.product_id = q.product_id AND p.product_id=s.product_id

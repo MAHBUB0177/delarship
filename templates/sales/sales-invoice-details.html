@@ -1,0 +1,33 @@
+{% load humanize %}
+<table id="data_table_sheet" class="table table-hover table-bordered table-sm">
+    <thead>
+        <tr>
+            <th class="text-center">Product Name</th>
+            <th class="text-center">Service Card</th>
+            <th class="text-center">Service From</th>
+            <th class="text-center">Service Upto</th>
+            <th class="text-center">Quantity</th>
+            <th class="text-center">Return Quantity</th>
+            <th class="text-center">Sales Rate</th>
+            <th class="text-center">Total Price</th>
+            <th class="text-center">Total Discount</th>
+            <th class="text-center">Price After Discount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rows in data %}
+        <tr>
+            <td class="text-left" data-type="name">{{ rows.product_name|default_if_none:"" }}</td>
+            <td class="text-left" data-type="name">{{ rows.service_card_no|default_if_none:"" }}</td>
+            <td class="text-left" data-type="name">{{ rows.service_start_date|default_if_none:"" }}</td>
+            <td class="text-left" data-type="name">{{ rows.service_end_date|default_if_none:"" }}</td>
+            <td class="text-center" data-type="inst">{{ rows.quantity|default_if_none:"" }}</td>
+            <td class="text-center" data-type="inst">{{ rows.returned_quantity|default_if_none:"" }}</td>
+            <td class="text-right" data-type="inst">{{ rows.product_price|default_if_none:"0.00"|intcomma }}</td>
+            <td class="text-right" data-type="inst">{{ rows.total_price|default_if_none:"0.00"|intcomma }}</td>
+            <td class="text-right" data-type="inst">{{ rows.discount_amount|default_if_none:"0.00"|intcomma }}</td>
+            <td class="text-right" data-type="inst">{{ rows.price_after_discount|default_if_none:"0.00"|intcomma }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

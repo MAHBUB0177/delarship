@@ -1,0 +1,267 @@
+{% extends 'appauth/appauth-slide-dropnav.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Product List | Sales ERP
+{% endblock %}
+{%block body%}
+<main class="app-main">
+	<div class="wrapper">
+		<div class="page">
+			<header class="page-title-bar">
+
+			</header>
+			<nav class="page-navs">
+				<div class="nav-scroller">
+					<div class="nav nav-tabs products_list_group">
+						{%for group in group_of_product%}
+						<a class="nav-link" onclick="refresh_listof_product_infoby_group(this)"
+							id="id_group_list_product" href="#"
+							data-group_id={{group.group_id}}>{{group.group_name}}</a>
+						{%endfor%}
+					</div>
+				</div>
+			</nav>
+			<div class="page-inner">
+				<div class="page-section">
+					<div class="section-block">
+						<div class="row">
+							<div class="col-lg-2 col-sm-12">
+
+								<div class="card-deck-xl">
+									<div class="card card-fluid">
+										<div class="card-header"> Products </div>
+										<div class="card-body">
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text"><span
+															class="oi oi-magnifying-glass"></span></span>
+												</div><input type="text" class="form-control"
+													placeholder="Search record">
+											</div>
+											<div class="todo-list">
+												<div class="list-group list-group-bordered group_product_list ">
+
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="col-lg-7 col-sm-12 col-md-12">
+								<div class="card card-fluid">
+									<div class="card-body">
+										<div class="form-group">
+											<div class="form-row">
+												<div class="input-group input-group-alt">
+
+													<div class="form-item col-md-3 mb-0">
+														<select name="product_id"
+															class="select form-control select2-hidden-accessible"
+															id="id_product_id">
+															<option value="" selected="" data-select2-id="1">Select
+																Product</option>
+
+														</select>
+													</div>
+													<div class="form-item col-md-3 mb-0">
+														<div class="input-group">
+															<input type="text" class="form-control"
+																placeholder="entry with Barcode">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="table_design_depositrcv">
+											<table class="table">
+												<thead>
+													<tr>
+														<th>Product Name</th>
+														<th>Product Model</th>
+														<th></th>
+														<th>Quantity</th>
+														<th></th>
+														<th> Prices </th>
+														<th> Total Price </th>
+														<th> Discount Amount </th>
+														<th> Discount Rate </th>
+														<th style="width:100px; min-width:100px;"> &nbsp; </th>
+													</tr>
+												</thead>
+												<tbody id="cart_table">
+
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-3 col-sm-12">
+								<div class="page-sidebars">
+									<header class="sidebar-header d-sm-none">
+										<nav aria-label="breadcrumb">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item active">
+													<a href="#" onclick="Looper.toggleSidebar()"><i
+															class="breadcrumb-icon fa fa-angle-left mr-2"></i>Back</a>
+												</li>
+											</ol>
+										</nav>
+									</header>
+									<div class="sidebar-section-fill">
+										<div class="card card-reflow">
+											<div class="card-body">
+												<button type="button" class="close mt-n1 d-none d-xl-none d-sm-block"
+													onclick="Looper.toggleSidebar()" aria-label="Close"><span
+														aria-hidden="true">×</span></button>
+												<h4 class="card-title text-center"> Invoice Summary </h4>
+												<div class="row">
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_total_bill_amount"></h6>
+															<p class="metric-label mt-1"> Total Bill Amount </p>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_total_discount_amount"></h6>
+															<p class="metric-label mt-1"> Discount Amount </p>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_total_quantity"></h6>
+															<p class="metric-label mt-1"> Total Quantity </p>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_total_product_price"></h6>
+															<p class="metric-label mt-1"> Bill After Discount </p>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_customer_balance"></h6>
+															<p class="metric-label mt-1"> Customer Balance </p>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="metric">
+															<h6 id="id_total_due_amount"></h6>
+															<p class="metric-label mt-1"> Due Amount </p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="card-body border-top pb-1">
+												<h4 class="card-title"> Customer Details </h4>
+												<form method="post" id="sales_master_form"
+													data-url="{% url 'sales-invoice-post' %}" class="update-form">
+													<div class="form-group">
+														{% csrf_token %}
+														<div class="form-row">
+															{% if is_head_office_user %}
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.branch_code | as_crispy_field }}
+															</div>
+															{% else %}
+															<input type='hidden' id='id_branch_code' name='branch_code'
+																value={{ global_branch_code }} readonly>
+															{% endif %}
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.type_code|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.tran_type_code|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.account_number|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-0 mb-0">
+																{{ sales_master.customer_id|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.customer_name|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.customer_address|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.employee_id|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.payment_document|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.invoice_discount|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.invoice_date|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.pay_amount|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.sms_notification|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.email_notification|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.total_discount_rate|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.total_discount_amount|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.latitude|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.longitude|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.customer_phone|as_crispy_field }}
+															</div>
+															<div class="form-group col-md-12 mb-0">
+																{{ sales_master.input_account_number|as_crispy_field }}
+															</div>
+														</div>
+														<button type="button" id="btnSubmitOrder"
+															class="btn btn-success">Create Invoice</button>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+<div class="modal fade" id="edit_model" role="dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+{%endblock body%}
+
+{% block js %}
+
+<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/sales/sales-accounts-search.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/sales/sales-sales-pos.js' %}"></script>
+{% endblock %}

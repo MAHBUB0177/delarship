@@ -1,0 +1,88 @@
+{% extends 'appauth/appauth-report-base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+Day Wise Purchase Report | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <div id="receiptData">
+
+        <page>
+            <div id="receipt-data">
+                <div class="text">
+                    <div class="inv-head">
+                        <div class="inv-right">
+                            <header class="receipt-header">
+                                <h2 class="store-name">{{ company_name }}</h2>
+                                <h4 class="store-name"> Day Wise Purchase Report </h4>
+                            </header>
+                        </div>
+                    </div>
+
+                    <div style="float: left; width: 100%;">
+
+                        <div style="width: 40%; float: left;">
+                            <p style="font-size: 14px; text-align: left;"><strong>Reporting Date : </strong> {{ p_from_date }} - {{ p_upto_date }}</p>
+                        </div>
+                        <div style="width: 30%; float: left;">
+                            <p style="font-size: 14px; text-align: left;"><strong>Branch Name : </strong> {{ p_branch_name }}</p>
+                        </div>
+                        <div style="width: 30%; float: right;">
+                            <p style="font-size: 14px; text-align: right;"><strong>Branch Address : </strong> {{ p_branch_address }}</p>
+                        </div>
+                    </div>
+
+                    <div style="clear:both;"></div>
+                    <table class="table table-striped table-condensed" id="report_table" width="1500px"
+                        style="border-left: none !important;">
+
+                        <thead>
+                            <tr>
+                                <th class="text-center col-xs-0.5" style="border-left:1px solid !important;">SL</th>
+                                <th class="text-center col-xs-5">Product Name </th>
+                                <th class="text-center col-xs-5">Product Model </th>
+                                <th class="text-center col-xs-5">Date </th>
+                                <th class="text-center col-xs-5">Unit Price </th>
+                                <th class="text-center col-xs-3">Quantity</th>
+                                <th class="text-center col-xs-5">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color: transparent !important;">
+
+                            {% for rows in dtl_data %}
+
+                            <tr style="background-color: transparent !important;">
+                                <td style="border-left:1px solid !important;">{{ rows.row_serial }}</td>
+                                <td class="text-left">{{ rows.product_name }}<br></td>
+                                <td class="text-left">{{ rows.product_model }}</td>
+                                <td class="text-center">{{ rows.stock_date }}</td>
+                                <td class="text-right">{{ rows.unit_price|intcomma }}</td>
+                                <td class="text-center">{{ rows.total_quantity }}</td>
+                                <td class="text-right">{{ rows.total_price|intcomma }}</td>
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+
+                        <tfoot>
+
+                            <tr>
+                                <th colspan="7" class="text-right" style="border:none !important;"> Total Quantity : {{ total_quantity }} </th>
+                            </tr>
+                            <tr>
+                                <th colspan="7" class="text-right" style="border:none !important;"> Total Price : {{ total_price|intcomma }} </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </page>
+    </div>
+
+</div>
+{% endblock body %}

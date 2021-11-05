@@ -1,0 +1,13 @@
+delarship/settings.py
+finance/migrations/*
+apifinance/migrations/*
+apiauth/migrations/*
+apihrm/migrations/*
+appauth/migrations/*
+hrm/migrations/*
+sales/migrations/*
+apisales/migrations/*
+delar/migrations/*
+apidelar/migrations/*
+ecom/migrations/*
+apiecom/migrations/*

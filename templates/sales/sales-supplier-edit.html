@@ -1,0 +1,54 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal-header"> </div>
+{% csrf_token %}
+<div class="container">
+    <h4 align="center">Update Supplier Information</h4>
+    <div class="card">
+        <div class="card-body">
+            <div>
+                <form method="post" id="edit_form" data-url="{% url 'sales-supplier-edit' id %}" class="update-form">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_name|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.proprietor_name|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_mobile|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_key_person|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.joining_date|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_email|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_web|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_grade|as_crispy_field }}
+                        </div>
+                        <div class="form-item col-md-3 mb-0">
+                            {{ form.supp_address|as_crispy_field }}
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'assets/javascript/pages/common-submit-editdata.js' %}"></script>

@@ -1,0 +1,151 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Manage Department | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card card-fluid">
+			<div class="card-body">
+				<div>
+					<form method="post" id="tran_table_data" data-url="{% url 'hrm-pay-bill-info-insert' %}" 
+						class="update-form">
+						<div class="form-group">
+							<div class="card">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-10 mb-0">
+											<h3 class="card-title"> {{title}} </h3>
+										</div>
+									</div>
+									<div>
+										{% csrf_token %}
+										<div class="form-row">
+											<div class="form-group col-md-4 mb-0">
+												{{ form.bill_date|as_crispy_field }}
+											</div> 
+					
+											<div class="form-group col-md-4 mb-0">
+												{{ form.bill_comments|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.bill_doc_detail|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.bill_amount|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.approval_amount|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.prepare_by|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.checked_by|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.approve_by|as_crispy_field }}
+											</div> 											
+											<div class="form-group col-md-4 mb-0">
+												{{ form.checked_status|as_crispy_field }}
+											</div> 						
+											<div class="form-group col-md-4 mb-0">
+												{{ form.approve_status|as_crispy_field }}
+											</div> 						
+											<div class="form-group col-md-4 mb-0">
+												{{ form.checked_status|as_crispy_field }}
+											</div> 						
+											<div class="form-group col-md-4 mb-0">
+												{{ form.approve_date|as_crispy_field }}
+											</div> 						
+											<div class="form-group col-md-4 mb-0">
+												{{ form.attached_file|as_crispy_field }}
+											</div> 										
+
+
+
+										</div>
+										<button type="button" id="btnAddRecord" class="btn btn-primary">Create New
+											</button>
+										<button type="button" id="btnSearch" class="btn btn-info pull-right"> Search
+											</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="app">
+
+			<div class="card card-fluid">
+				<div class="card-body">
+					<table id="dt-table-list" class="table dt-responsive nowrap w-100">
+						<thead>
+							<tr>
+								<th>  id </th>
+								<th> Bill Date </th>
+								<th> Bill comments </th>
+								<th> Bill doc details </th>
+								<th>Bill Amount </th>
+								<th>Aproved Amount</th>
+								<th> Prepared By</th>
+								<th>Checked By</th>
+								<th>Approved By</th>
+								<th>Check Status</th>
+								<th>Aproved status</th> 
+							<th>Check Date</th>
+							<th>Aproved date</th>
+							<th>AttachedFile</th>
+								<th> Action</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>  id </th>
+								<th> Bill Date </th>
+								<th> Bill comments </th>
+								<th> Bill doc details </th>
+								<th>Bill Amount </th>
+								<th>Aproved Amount</th>
+								<th> Prepared By</th>
+								<th>Check By</th>
+								<th>Check Status</th>
+								<th>Aproved status</th> 
+							<th>Check Date</th>
+							<th>Aproved date</th>
+							<th>AttachedFile</th>
+								<th> Action</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="edit_model" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			</div>
+		</div>
+	</div>
+
+	{% endblock body %}
+
+	{% block js %}
+	<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+	<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+	<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+	
+	<script src="{% static 'assets/javascript/pages/hrm/hrm-paybill-createlist.js' %}"></script>
+	{% endblock %}
+</div>

@@ -1,0 +1,58 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<div class="modal-header"> </div>
+{% csrf_token %}
+<div class="container">
+	<h4 align="center">Update Sales Region Information</h4>
+	<div class="card">
+		<div class="card-body">
+			<div>
+				<form method="post" id="edit_form" data-url="{% url 'delar-center-edit' id %}" class="update-form">
+					{% csrf_token %}
+					<div class="form-row">
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_name|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_referred_by|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_address|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_open_date|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_region_id|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_employee_id|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_phone_number|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_day|as_crispy_field }}
+						</div>
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_status|as_crispy_field }}
+						</div> 
+						<div class="form-item col-md-3 mb-0">
+							{{ form.center_closure_date|as_crispy_field }}
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-default pull-right" data-dismiss="modal">Close</button>
+				<button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+			</div>
+			</form>
+			<div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{% static 'assets/javascript/pages/common-submit-editdata.js' %}"></script>

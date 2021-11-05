@@ -1,0 +1,133 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+Online Product List | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<body>
+  <div class="app">
+    <div class="page">
+
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="form-group">
+            <div class="card card-fluid">
+              <div class="card-body">
+                <h4 class="card-title"> Online Products </h4>
+                <form method="post" id="tran_table_data" data-url="{% url 'ecom-product-add' %}">
+                  <div class="form-row">
+                    {% csrf_token %}
+                    <div class="form-group col-md-12 mb-0">
+                      {{ form.product_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_brand_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.category_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.sub_category_id | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.product_model | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-3 mb-0">
+                      {{ form.product_group | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.product_price | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.discount_amount | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-2 mb-0">
+                      {{ form.product_old_price | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-12 mb-0">
+                      {{ form.product_description | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_feature | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_keyword | as_crispy_field }}
+                    </div>
+                    <div class="form-group col-md-4 mb-0">
+                      {{ form.product_specification | as_crispy_field }}
+                    </div>
+                    
+                  </div>
+                  <div class>
+                    <button type="button" id="btnAddItem" class="btn btn-info"> Add Product</button>
+                    <button type="button" id="btnSearch" class="btn btn-primary"> Search Product</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+
+
+          <header class="card-title-bar">
+            <h3 class="card-title text-center"> Product List</h3>
+          </header>
+          <div class="card card-fluid">
+            <div class="card-body">
+              <table id="dt-table-list" class="table dt-responsive nowrap w-100">
+                <thead>
+                  <tr>
+                    <th>Product ID </th>
+                    <th>Product Name </th>
+                    <th>Model </th>
+                    <th>Group </th>
+                    <th>Price </th>
+                    <th>Discount</th>
+                    <th>Old Price</th>
+                    <th>Action </th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Product ID </th>
+                    <th>Product Name </th>
+                    <th>Model </th>
+                    <th>Group </th>
+                    <th>Price </th>
+                    <th>Discount</th>
+                    <th>Old Price</th>
+                    <th>Action </th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit_model" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>
+
+  {% endblock body %}
+
+  {% block js %}
+  <script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/common-parameter-details.js' %}"></script>
+	<script src="{% static 'assets/tinymce/tinymce.min.js' %}"></script>
+
+  <script src="{% static 'assets/javascript/pages/sales/sales-select-products.js' %}"></script>
+  <script src="{% static 'assets/javascript/pages/ecom/ecom-products-list.js' %}"></script>
+  {% endblock %}
+</body>

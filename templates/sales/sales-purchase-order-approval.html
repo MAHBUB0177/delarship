@@ -1,0 +1,71 @@
+{% extends 'appauth/appauth-home.html' %}
+{% load static %}
+{% block title %}
+Purchase Order Approval | {{ application_title }}
+{% endblock %}
+
+{% block body %}
+
+<div class="app">
+    <div class="page">
+        <div class="page-inner">
+            <header class="page-title-bar">
+                <h3 align="center" class="page-title">Purchase Order List Waiting for Approval</h3>
+            </header>
+            <div class="page-section">
+                <div class="card card-fluid">
+                    <div class="card-body">
+                        <table id="dt-purchase-approval" class="table dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th> Branch Code </th>
+                                    <th> Purchase ID </th>
+                                    <th> Voucher Number </th>
+                                    <th> Purchase Date </th>
+                                    <th> Quantity </th>
+                                    <th> Total Price </th>
+                                    <th> Comments </th>
+                                    
+                                    <th> Action</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th> Branch Code </th>
+                                    <th> Purchase ID </th>
+                                    <th> Voucher Number </th>
+                                    <th> Purchase Date </th>
+                                    <th> Quantity </th>
+                                    <th> Total Price </th>
+                                    <th> Comments </th>
+                                    
+                                    <th> Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="stock_edit" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
+
+
+{% block js %}
+<script src="{% static 'assets/vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'assets/vendor/datatables/extensions/responsive/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+
+<script src="{% static 'assets/javascript/pages/sales/sales-purchase-order-approval.js' %}"></script>
+{% endblock %}
+</body>
